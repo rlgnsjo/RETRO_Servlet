@@ -32,12 +32,14 @@
 			<ul>
 				<li><a href="#">
 					
-	<button id="open_btn">LOGIN</button>
+	
 	<button id="topBtn">
 		<i class="fas fa-arrow-up"></i>				
 	</button></a></li>
-				<li><a href="#">joinus</a></li>
-				<li><a href="#">help</a></li>
+				<li><a href="${path}">login</a></li>
+				<li><a href="${path}/constract.retro" id="login_btn">joinus</a></li>
+				<li><a href="${path}">help</a></li>
+				
 			</ul>
 
 		</div>	
