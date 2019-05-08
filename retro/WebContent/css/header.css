@@ -1,0 +1,241 @@
+	.nav_wrap {
+			
+			width: 100%;
+			height: 65px;
+			background: white; 
+
+		}
+		.nav_wrap > div> ul> li{
+			float: left;
+			position: relative;
+
+
+		}
+		.nav_wrap> div > ul> li> a{
+			color: black;
+			font-size: 1.3em;			
+			line-height: 40px; /* 글자폰트마다 사이즈가 다른데 글자(공간)간격의  길이를 늘리는것  */
+			padding: 0 35px;
+			height: 65px;
+			 display: inline-block;
+			 text-transform: uppercase;
+	
+		}
+		.right_content ul li:hover {
+			background-color: #FFD8D8;
+		}
+		.dropdown1{			
+			background-color: #f9f9f9;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			position: absolute;			
+			display: none; 
+		}
+		.dropdown1 > ul> li{
+			position: relative;
+		}
+		.dropdown1 > ul> li > a{
+			color: #333;
+			width: 120px;
+			display: inline-block;
+			padding: 10px;
+			font-size: 1.2em; 
+		}
+		.nav_wrap> div > ul> li:hover .dropdown1 {
+			display: block;
+		}
+		.dropdown2 {
+			display: none;
+			top: 0px;
+			left: 140px;
+			position: absolute;	
+			text-align: center;					
+			background-color: #f9f9f9;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+		}
+		.dropdown2 > a {
+			width: 120px;
+			color:#333 ;
+			padding: 10px;
+			display: block;
+			font-size: 1.3em;
+		}
+		.dropdown2 a:hover {
+			background-color: #FFD8D8;
+		}
+		.dropdown1 > ul > li:hover .dropdown2 {
+			display: block;
+		}
+	.header_menu {
+		width: 100%;
+		background-color: #FAE0D4;
+		height: 35px;  
+	}
+	
+	.header_sns {
+		display: inline-block;
+		height: 35px;
+
+	}
+	.header_sns i{
+		color: white;
+		font-size: 1.6em;
+		padding: 0 2px;
+		line-height: 35px;
+	}
+	.header_member{
+		float: right;
+	}
+	.header_member li{
+		float: left;
+
+	}
+	.header_member ul > li > a{
+		color: white;
+		text-decoration: none; 
+		line-height: 35px;
+		font-size: 1.2em;
+		padding: 0 10px;
+		height: 35px;
+		display: inline-block;
+
+	}
+	.header_member > ul >li:hover {
+		background-color: #FFD8D8;
+	}
+
+
+
+	.inner_header {
+		max-width: 1440px;
+		margin: 0 auto;
+
+	}
+	.header_logo {
+		width: 100%;
+		text-align: center;
+		
+	}
+	.header_nav {
+		padding-left: 380px;
+		width: 100%;
+		background-color: white;
+		height: 65px; 
+	}
+	.dropdown{
+		display: inline-block;
+		text-align: center;
+	}
+	.dropdown_content{
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;	
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);	
+
+	}
+	.dropdown_content a{
+		 color: black;
+		 padding:  12px 16px;
+		 text-decoration: none;
+		 display: block;
+		 text-align: left;
+	
+	}
+	.dropdown:hover .dropdown_content{
+		display: block;
+	}
+	#footer{
+		padding: 45px 0;
+
+		}
+	#footer * {
+		font-size: 12px;
+		line-height: normal;
+		list-style: none;
+		color: #333;
+		}
+		#footer > ul {
+			margin: 0 auto 9px;
+			text-align: center;
+		}
+		#footer > ul >li{
+			display: inline;
+			padding: 0 5px 0 7px;
+			border-left: 1px solid #dadada;
+
+		}
+		#footer > ul >li:first-child{ /*   자식선택자의 종류중 하나 */
+			border-left: 0px; 
+		}
+		#footer > ul >li a:hover{
+			color: 	#FFB6C1;
+			text-decoration: underline;
+		}
+		#addr_logo {
+			width: 63px;
+			height: 11px;
+		}
+		#address{
+			margin: 0px auto;
+			text-align: center;
+		}
+		#address * {
+			font: 9px verdana;
+		}
+		#address a{
+			font-weight: bold;
+		}
+		#address a:hover{
+			color:	#FFB6C1;
+		}
+		#footer{
+		padding: 15px 0;						
+   		right: 38%;
+
+		}
+		#footer  {
+			font-size: 12px;
+			line-height: normal;
+			list-style: none;
+			color: #333;
+		}
+		#footer > ul {
+			margin: 0 auto 9px;
+			text-align: center;
+		}
+		#footer > ul >li {
+			cursor: pointer;
+			display: inline;
+			padding: 0 5px 0 7px;
+			border-left: 1px solid #dadada;
+
+		}
+		#footer > ul >li:first-child{ /*   자식선택자의 종류중 하나 */
+			border-left: 0px; 
+		}
+		#footer > ul >li a:hover{
+			color:	#FFB6C1;
+			text-decoration: underline;
+		}
+		#topBtn{
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		font-size: 22px;
+		width: 50px;
+		height: 50px;
+		background: #FFD8D8;
+		color: white;
+		border:none;
+		cursor: pointer;
+		border-radius: 20%;
+		outline: none;
+		display: none;
+		}
+		#topBtn i{
+		transition: .3s;
+
+		}
+		#topBtn:hover i {
+			transform: scale(1.3); 
+		}

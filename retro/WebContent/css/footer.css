@@ -1,0 +1,32 @@
+#footer {
+	padding: 15px 0;
+	right: 38%; /* 기훈씨 쌤한테 이거 물어봐요 가운데 맞추는거 */
+}
+
+#footer {
+	font-size: 12px;
+	line-height: normal;
+	list-style: none;
+	color: #333;
+}
+
+#footer>ul {
+	margin: 0 auto 9px;
+	text-align: center;
+}
+
+#footer>ul>li {
+	cursor: pointer;
+	display: inline;
+	padding: 0 5px 0 7px;
+	border-left: 1px solid #dadada;
+}
+
+#footer>ul>li:first-child { /*   자식선택자의 종류중 하나 */
+	border-left: 0px;
+}
+
+#footer>ul>li a:hover {
+	color: #FFB6C1;
+	text-decoration: underline;
+}
