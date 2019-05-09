@@ -1,0 +1,34 @@
+--  회원 Sequuece 생성
+DROP SEQUENCE seq_member;
+CREATE SEQUENCE seq_member
+    START WITH 1
+    INCREMENT BY 1
+    NOCYCLE;
+
+--회원가입 관련 db테이블 생성!          
+DROP TABLE tbl_member;
+CREATE TABLE tbl_member(
+    id VARCHAR(30) PRIMARY KEY,
+    pw VARCHAR(30) NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    zipcode VARCHAR(20) NOT NULL,
+    addr1 VARCHAR(200) NOT NULL,
+    addr2 VARCHAR(200) NOT NULL,
+    regdate DATE DEFAULT SYSDATE    
+);  
+ 
+ 
+INSERT INTO tbl_member(id,pw,name,phone,email, zipcode, addr1, addr2)
+VALUES('user01','1234','유저1','01011111111','user01@gmail.com','500601','광주광역시 동구', '주공아파트' ); 
+INSERT INTO tbl_member(id,pw,name,phone,email, zipcode, addr1, addr2)
+VALUES('user02','1234','유저2','01011111112','user02@gmail.com','500602','광주광역시 남구', '주상복합' ); 
+INSERT INTO tbl_member(id,pw,name,phone,email, zipcode, addr1, addr2)
+VALUES('user03', '1234', '유저3', '01011111113','user03@gmail.com', '500603' , '광주광역시 서구', '브랜드아파트' ); 
+COMMIT;
+
+DELETE FROM tbl_member;
+
+SELECT * FROM tbl_member;
+ 
