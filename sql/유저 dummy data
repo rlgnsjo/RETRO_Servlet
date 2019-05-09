@@ -1,3 +1,97 @@
+
+ DROP TABLE tbl_product;
+ CREATE TABLE tbl_product(
+ p_code VARCHAR2(5) PRIMARY KEY,
+ p_name VARCHAR2(100) NOT NULL,
+ p_price NUMBER NOT NULL,
+ p_img VARCHAR2(100),
+ p_type VARCHAR(50) NOT NULL,
+ p_cnt NUMBER DEFAULT 0,
+ p_good NUMBER DEFAULT 0,
+ p_indate DATE DEFAULT SYSDATE
+ ); 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ --RERRO 프로젝트 DUMMY 데이터 생성
+ 
+ DROP SEQUENCE seq_product;
+ CREATE SEQUENCE seq_product
+ START WITH 1
+ INCREMENT BY 1
+ NOCYCLE;
+ 
+ 
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'샤넬1',65000,'chl01.jpg','샤넬',1,10);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'샤넬2',65000,'chl02.jpg','샤넬',2,11);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'샤넬3',65000,'chl03.jpg','샤넬',3,12);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'샤넬4',65000,'chl04.jpg','샤넬',4,13);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'구찌1',65000,'gci01.jpg','샤넬',5,14);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'구찌2',65000,'gci02.jpg','샤넬',6,15);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'구찌3',65000,'gci03.jpg','샤넬',7,16);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'구찌4',65000,'gci04.jpg','샤넬',8,17);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'아이돌1',65000,'idl01.jpg','샤넬',9,18);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'아이돌2',65000,'idl02.jpg','샤넬',10,19);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'아이돌3',65000,'idl03.jpg','샤넬',11,20);
+INSERT INTO tbl_product(p_code,p_name,p_price,p_img,p_type, p_cnt, p_good)
+VALUES(seq_product.NEXTVAL,'아이돌4',65000,'idl04.jpg','샤넬',12,21);
+commit; 
+ 
+ SELECT * FROM tbl_product;
+ 
+commit;
+  
+SELECT *
+FROM (SELECT * FROM tbl_product 
+      ORDER BY p_good DESC)
+ WHERE rownum <= 5;
+ 
+ 
+ SELECT *
+ FROM (SELECT * FROM tbl_product
+      ORDER BY p_indate DESC)
+  WHERE rownum <= 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 --  회원 Sequuece 생성
 DROP SEQUENCE seq_member;
 CREATE SEQUENCE seq_member
