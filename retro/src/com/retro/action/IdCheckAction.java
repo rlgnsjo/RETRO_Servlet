@@ -10,18 +10,24 @@ import javax.xml.ws.Response;
 import org.apache.catalina.filters.AddDefaultCharsetFilter.ResponseWrapper;
 import org.json.simple.JSONObject;
 
+import com.retro.dao.MemberDAO;
+
 public class IdCheckAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		System.out.println("id>>>" + id);
+		// System.out.println("id>>>" + id); 
+		
+		MemberDAO mDao = MemberDAO.getInstance();
+		String result = mDao.idCheck(id);
+
+		
 		
 		//Ajax => JSON방식 => return할때 보내는 값도 json방식
-		JSONObject jobj = new JSONObject();
-		int message = 1;
-		jobj.put("message", message);
+		JSONObject jobj = new JSONObject();		
+		jobj.put("message", result);
 		jobj.put("id", id);
 		
 		response.setContentType("application/x-json; charset=UTF-8");
