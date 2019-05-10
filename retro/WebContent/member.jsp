@@ -248,7 +248,7 @@
 		</div>
 	</header>
 	<section>
-		<form class="join_form" method="POST" action="">
+		<form class="join_form" method="POST" action="memberplay.retro">
 		<div class="container">
 			<div class="join_content">
 				<div class="row_group">
@@ -376,14 +376,14 @@
 					<div class="bir_wrap">						
 						<div class="bir_mm">
 							<span class="ps_box">
-								<input type="text" id="name" name="name" class="int" maxlength="20">							
+								<input type="text" id="name" name="email1" class="int" maxlength="20">							
 							<span class="error_next_box">필수 정보입니다.</span>	
 							</span>
 						</div>
 						<div class="bir_dd">
 							<span class="ps_box">
 								<!-- <input type="text" id="dd" placeholder="일" class="int" maxlength="2"> -->
-								<select id="mm" class="sel">
+								<select name="email2" class="sel" id="dd">
 										<option value="직접입력">직접입력</option>															
 										<option value="naver.com(네이버)">@naver.com(네이버)</option>
 										<option value="daum.net(다음카카오)">@daum.net(다음카카오)</option>
@@ -415,25 +415,23 @@
 					</div>
 					<div class="bir_wrap">
 						<div class="bir_add">										
-							<input type="text" id="sample6_postcode" placeholder="우편번호">
-
-							<input type="button" class="shy_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample6_address" placeholder="일반주소 입력">
-							<input type="text" id="sample6_detailAddress" placeholder="상세주소 입력">							
-						</div>
-						
+							<input type="text"  id="sample6_postcode" class="addrbtn" placeholder="우편번호"readonly="readonly" >
+							<input type="button" name="addr" class="shy_btn" onclick="sample6_execDaumPostcode()" id="addr_btn" value="우편번호 찾기" ><br>
+							<input type="text" name="addr1" id="sample6_address" placeholder="일반주소 입력" class="addrbtn" readonly="readonly">
+							<input type="text"  name="addr2" id="sample6_detailAddress" placeholder="상세주소 입력">							
+						</div>						
 										
 					</div>
 										
 			
 					
-		
-				
+						
 
 				<div class="btn_double_area">
 					<span>
-						<a href="#" class="btn_type">가입하기</a>
+						<a href="#" class="btn_type btn_agree">가입하기</a>
 					</span>
+																
 				</div>
 			</div>
 		</div>
@@ -464,17 +462,48 @@
 				</div>
 			</div>
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script type="text/javascript" src="js/validation.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> 		
 		<script type="text/javascript">
 		
-			$(document).ready(function(){								
-				$("#id").blur(function(){
-					var id = $.trim($(this).val());	
-					var regEmpty = /\s/g;
-					var reg = /[^a-z0-9-_.]+/g;
+			$(document).ready(function(){	
+				$('.btn_agree').click(function(){
+					$('join_form')
+				});
+				
+				
+				//1. (#id)에 값을 입력후 blur()하면 이벤트발생 
+				$('#id').blur(function(){
+					// 2. input(#id) value 값을 가져와 memId에 담음.
+					var memId = $.trim($('#id').val());	
+					//3. joinValidate의 checkId() 함수를 실행, memId를 매개변수로 보냄.
+					//7. checkID() 함수를 실행후 결과값 (code, desc)을 
+					// 변수 checkResult에 담음.
+					var checkResult = joinValidate.checkId(memId);
 					
+					
+					if(checkResult.code != 0) {
+						//8-1(실패). code값이 0이 아닌경우 => 유효한값이 아님
+						// 즉 유효한값이 아닌것을 알리기 위해 경고메세지 출력
+						$('.error_next_box').eq(0).text(checkResult.desc)
+											.css("display", "block")	
+                        					.css("color", "tomato");	
+						return false;
+					}else {
+						//8-2(성공). code값이 0인 경우 => 유효한값임 유효한값중 중복값인지 ajax로 검증시작! 
+						
+						//9. ajaxCheck() 메서드 실행, memId를 매개변수로 보냄.
+						// 31. ajaxCheck(memId)의 return 값이 1이면 return true;
+						if(ajaxCheck(memId) == "1"){
+													
+							return true;
+						}						
+					}	
+					// 32.ajaxCheck(memId)의 return 값이 -1이면 return false;
+					return false;
+				});	
 					// id의 유효성 체크 1) null 2) 정규식 3) 중복체크 
-					if(id == "" || id.length == 0) {
+					/* if(id == "" || id.length == 0) {
 						$('.error_next_box').eq(0).text("필수 입력 정보입니다.")
                       		  					  .css("display", "block")	
                                                   .css("color", "tomato");								
@@ -499,43 +528,27 @@
 					// 중복 Check: false
 			    	
 					//중복체크 (Ajax)
-					ajaxCheck(id);
-				});	
+					ajaxCheck(id); */
 				
-				$('#pswd1').blur(function(){										
-					var pw = $.trim($(this).val());		
-					var regEmpty = /\s/g; 					 
-				 	var pwreg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+				
+				$('#pswd1').blur(function(){
+					var memPw = $.trim($('#pswd1').val());	
+					var memRpw =$.trim($('#pswd2').val());	 
+					var checkResult = joinValidate.checkPw(memPw, memRpw);
 					
-					if(pw == "" || pw.length == 0) {
-						$('.error_next_box').eq(1).text("필수 입력 정보입니다.")
-                      		  					  .css("display", "block")	
-                                                  .css("color", "tomato");								
-						return false;						
-					} else if(pw.match(regEmpty)){
-						$('.error_next_box').eq(1).text("공백없이 작성해 주세요.")
-	  					  						   .css("display", "block")	
-                      							   .css("color", "tomato");	
-						return false;						
-					} else if(!pwreg.test(pw)) {
-						$('.error_next_box').eq(1).text("올바른 비밀번호를 입력해주세요.")
- 						                          .css("display", "block")	
-                        		                  .css("color", "tomato");	
+					if(checkResult.code != 0) {
+						$('.error_next_box').eq(1).text(checkResult.desc)
+											.css("display", "block")	
+                        					.css("color", "tomato");	
 						return false;
-					} else {
-						$('.error_next_box').eq(1).text("올바른 비밀번호 입니다.")
-                         					      .css("display", "block")	
-		                				          .css("color", "dodgerblue");	
-						var rpw = $.trim($('#pswd2').val());
-						
-						if(rpw != null || rpw.length != 0){
-							if(pw == rpw){
-							$('.error_next_box').eq(2).text("올바른 비밀번호 입니다.")
-		                                               .css("display", "block")	
-	                                                   .css("color", "dodgerblue");
-							}
-						}
-					}
+					}else {
+						$('.error_next_box').eq(1).text(checkResult.desc)
+											.css("display", "block")	
+    										.css("color", "dodgerblue");
+						return true;
+					}	
+					return false;
+										
 				});	
 				
 				$('#pswd2').blur(function(){	
@@ -670,31 +683,29 @@
 						}
 					}
 				}); */
-			});
-		function ajaxCheck(id) {
-			$.ajax({
-				url: "idCheck.retro",
-				type: "POST",
-				dataType: "json",
-				data: "id="+id,
-				success: function(data){
-					if(data.message == "-1"){
-						$(".error_next_box").eq(0).text("이미 사용중인 아이디 입니다.")
-						                          .css("display", "block")	
-						                          .css("color", "tomato");									                         									
-					}else {
-						$(".error_next_box").eq(0).text("사용가능한 아이디 입니다.")
-                          						  .css("display", "block")	
-                                                  .css("color", "dodgerblue");
-					}
-													
-				},
-				error: function() {
-					alert("System Error!!");
-				}
-			});
+			// 우편번호, 주소클릭시 다음주소 API출력
+			$('.addrbtn').click(function(){
+				var zipcode = $('.addrbtn').eq(0).val();
+				var addr = $('.addrbtn').eq(1).val();
 				
-		}
+				if(zipcode =="" || addr ==""){
+					$('#addr_btn').click();
+				}
+								
+			});
+				$('#sample6_address2').blur(function(){
+					var dAddr = $(this).val();
+					
+					if(dAddr == "" || dAddr.length == 0) {
+						$('.error_next_box').eq(6).text("필수 정보 입니다.")
+ 						   						  .css("display", "block")	
+						                          .css("color", "tomato");
+						return false;
+					}
+				});
+			
+		});
+		
 			
 		</script>		
 	</footer>
@@ -703,10 +714,7 @@
 	    function sample6_execDaumPostcode() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
-	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                
 	                var addr = ''; // 주소 변수
 	                var extraAddr = ''; // 참고항목 변수
 
@@ -733,10 +741,12 @@
 	                        extraAddr = ' (' + extraAddr + ')';
 	                    }
 	                    // 조합된 참고항목을 해당 필드에 넣는다.
-	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+	                    document.getElementById("sample6_detailAddress").value = extraAddr;
+	                    
+	                   
 	                
 	                } else {
-	                    document.getElementById("sample6_extraAddress").value = '';
+	                    document.getElementById("sample6_detailAddress").value = '';
 	                }
 
 	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
