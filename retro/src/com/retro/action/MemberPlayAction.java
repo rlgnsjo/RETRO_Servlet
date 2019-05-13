@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.retro.dao.MemberDAO;
 import com.retro.dto.MemberDTO;
 
 public class MemberPlayAction implements Action{
@@ -30,8 +31,8 @@ public class MemberPlayAction implements Action{
 		System.out.println(mDto.toString());
 		
 		
-		
-		
+		MemberDAO mDao = MemberDAO.getInstance(); 
+		mDao.mem_insert(mDto);
 		
 		ActionForward  forward = new ActionForward(); 
 		forward.setpath(url);  

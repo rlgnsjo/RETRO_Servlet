@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@  include file="common.jsp"  %>   
-
-    
+<%@  include file="common.jsp"  %>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +34,17 @@
 	<button id="topBtn">
 		<i class="fas fa-arrow-up"></i>				
 	</button></a></li>
-				<li><a href="${path}">login</a></li>
-				<li><a href="${path}/constract.retro" id="login_btn">joinus</a></li>
-				<li><a href="${path}">help</a></li>
+			<c:choose>
+				<c:when test="${empty sessionScope.loginUser}" >
+					<li><a href="${path}/constract.retro" id="login_btn">joinus</a></li>
+					<li><a href="login.jsp">login</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="#">${sessionScope.loginUser.name}</a>(${sessionScope.loginUser.id})</li>
+					 <%-- a href="${path}/loginOutAjax.retro"  --%>
+					<li><a href="#" class="logout_btn">logout</a></li>
+				</c:otherwise>
+			</c:choose>	
 				
 			</ul>
 

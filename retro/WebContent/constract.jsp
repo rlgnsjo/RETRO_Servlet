@@ -426,7 +426,7 @@
 					</span>
 					<span>copyright</span>
 					<span>ⓒ</span>
-					<span><strong><a href="#">NAVER Corp</a></strong> </span>
+					<span><strong><a href="#">NAVER .Corp</a></strong> </span>
 					<span>All right Reserved.</span>
 					
 				</div>

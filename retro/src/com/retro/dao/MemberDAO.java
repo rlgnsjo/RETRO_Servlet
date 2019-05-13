@@ -60,9 +60,9 @@ public class MemberDAO {
 		// "1" or "-1" 값을 return 결과값으로 보냄.
 		return result;
 	}
-	pubilc int mem_insert(MemberDTO mDto) {
+	public int mem_insert(MemberDTO mDto) {
 		sqlSession = sqlSessionFactory.openSession(true);
-		
+		int result = 0;
 		try {
 			result = sqlSession.insert("mem_insert", mDto);
 		} catch (Exception e) {
@@ -70,6 +70,7 @@ public class MemberDAO {
 		}finally {
 			sqlSession.close();
 		}
+		return result;
 	}
 }
 

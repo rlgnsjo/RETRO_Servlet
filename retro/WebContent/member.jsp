@@ -415,8 +415,8 @@
 					</div>
 					<div class="bir_wrap">
 						<div class="bir_add">										
-							<input type="text"  id="sample6_postcode" class="addrbtn" placeholder="우편번호"readonly="readonly" >
-							<input type="button" name="addr" class="shy_btn" onclick="sample6_execDaumPostcode()" id="addr_btn" value="우편번호 찾기" ><br>
+							<input type="text"  name="addr" id="sample6_postcode" class="addrbtn" placeholder="우편번호"readonly="readonly" >
+							<input type="button" class="shy_btn" onclick="sample6_execDaumPostcode()" id="addr_btn" value="우편번호 찾기" ><br>
 							<input type="text" name="addr1" id="sample6_address" placeholder="일반주소 입력" class="addrbtn" readonly="readonly">
 							<input type="text"  name="addr2" id="sample6_detailAddress" placeholder="상세주소 입력">							
 						</div>						
@@ -429,7 +429,7 @@
 
 				<div class="btn_double_area">
 					<span>
-						<a href="#" class="btn_type btn_agree">가입하기</a>
+						<input type="submit" class="btn_type btn_agree">가입하기</input>
 					</span>
 																
 				</div>
