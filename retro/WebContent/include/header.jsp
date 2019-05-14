@@ -36,13 +36,16 @@
 	</button></a></li>
 			<c:choose>
 				<c:when test="${empty sessionScope.loginUser}" >
-					<li><a href="${path}/constract.retro" id="login_btn">joinus</a></li>
-					<li><a href="login.jsp">login</a></li>
+					<li><a href="${path}/constract.retro" id="login_btn">회원가입</a></li>
+					<li><a href="login.jsp">로그인</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="#">${sessionScope.loginUser.name}</a>(${sessionScope.loginUser.id})</li>
 					 <%-- a href="${path}/loginOutAjax.retro"  --%>
-					<li><a href="#" class="logout_btn">logout</a></li>
+					<li><a href="#" class="logout_btn">로그아웃</a></li>
+					<li><a href="${path}/pwUpdate.retro">비밀번호수정</a></li>
+					<li><a href="${path}/infoUdate.retro">내정보수정</a></li>
+					<li><a href="${path}/dropMember.retro">회원 탈퇴</a></li>
 				</c:otherwise>
 			</c:choose>	
 				
@@ -150,6 +153,21 @@
 				$('#close_btn').click(function(event) {
 					$('#modal_all').css('display', 'none');
 					});
+				});
+				$(document).on('click', '.logout_btn', function(){
+					$.ajax({
+						url: "logoutAjax.retro",
+						type: "POST",
+						dataType: "json",						
+						success: function(data){							 
+							location.reload();
+						},
+						error:function() {
+							alert("System Error\(*.*)/");						
+						}
+						
+					});
+					
 				});
 	</script>
 

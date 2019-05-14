@@ -16,8 +16,13 @@ import com.retro.action.IdCheckAction;
 import com.retro.action.IndexAction;
 import com.retro.action.LoginAjaxAction;
 import com.retro.action.LoginOutAction;
+import com.retro.action.LogoutAjaxAction;
 import com.retro.action.MemberAction;
 import com.retro.action.MemberPlayAction;
+import com.retro.action.PwCheckAction;
+import com.retro.action.PwUpdateAction;
+import com.retro.action.infoUdateAction;
+import com.retro.action.infoUpdatePlayAction;
 
 /**
  * Servlet implementation class RetroFrontController
@@ -74,6 +79,21 @@ public class RetroFrontController extends HttpServlet {
 			forward = action.excute(request, response); 
 		}else if (command.equals("/loginOut.retro")) {
 			action = new LoginOutAction(); 
+			forward = action.excute(request, response); 
+		}else if (command.equals("/logoutAjax.retro")) {
+			action = new LogoutAjaxAction(); 
+			forward = action.excute(request, response); 
+		}else if (command.equals("/infoUdate.retro")) {
+			action = new infoUdateAction(); 
+			forward = action.excute(request, response); 
+		} else if (command.equals("/infoUpdatePlay.retro")) {
+			action = new infoUpdatePlayAction(); 
+			forward = action.excute(request, response); 
+		} else if (command.equals("/pwUpdate.retro")) {
+			action = new PwUpdateAction(); 
+			forward = action.excute(request, response); 
+		} else if (command.equals("/pwCheck.retro")) {
+			action = new PwCheckAction(); 
 			forward = action.excute(request, response); 
 		}
 
