@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.retro.action.Action;
 import com.retro.action.ActionForward;
 import com.retro.action.ConstractAction;
+import com.retro.action.DropMemberAction;
+import com.retro.action.DropMemberPlayAction;
 import com.retro.action.IdCheckAction;
 import com.retro.action.IndexAction;
 import com.retro.action.LoginAjaxAction;
@@ -21,6 +23,7 @@ import com.retro.action.MemberAction;
 import com.retro.action.MemberPlayAction;
 import com.retro.action.PwCheckAction;
 import com.retro.action.PwUpdateAction;
+import com.retro.action.PwUpdatePlayAction;
 import com.retro.action.infoUdateAction;
 import com.retro.action.infoUpdatePlayAction;
 
@@ -94,6 +97,15 @@ public class RetroFrontController extends HttpServlet {
 			forward = action.excute(request, response); 
 		} else if (command.equals("/pwCheck.retro")) {
 			action = new PwCheckAction(); 
+			forward = action.excute(request, response); 
+		} else if (command.equals("/pwUpdatePlay.retro")) {
+			action = new PwUpdatePlayAction(); 
+			forward = action.excute(request, response); 
+		} else if (command.equals("/dropMember.retro")) {
+			action = new DropMemberAction(); 
+			forward = action.excute(request, response); 
+		} else if (command.equals("/dropMemberPlay.retro")) {
+			action = new DropMemberPlayAction(); 
 			forward = action.excute(request, response); 
 		}
 

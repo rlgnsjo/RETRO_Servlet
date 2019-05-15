@@ -95,7 +95,7 @@
 		line-height: 18px;
 		color: #8e8e8e;
 	}
-	.error_next_box {
+	.pwAjax {
 		display: none;
 		margin: 9px 0 -2px;
 		font-size: 12px;
@@ -247,7 +247,11 @@
 		</div>
 	</header>
 	<section>
-		<form class="join_form" method="POST" action="">
+		<form class="join_form" method="POST" action="pwUpdatePlay.retro" id="retro_pw">
+		<!--인풋태그 아래에 아이디 값을 받아주며 아이디 값은 session에 있으니 
+		session에서 id값을 꺼내주거나 value값에 sessionScope 안에 값을 직접적으로 담아주는 방법이 있다. 
+		input type= "hidden" 은 input 태그 안에 있는 값을 숨겨준다.     -->
+		<input type= "hidden" name ="id"  value="${sessionScope.loginUser.id}">  
 		<div class="container">
 			<div class="join_content">
 				<div class="row_group">
@@ -256,12 +260,12 @@
 							<label for="pswd1">비밀번호 수정</label>							
 						</h3>
 						<span class="ps_box int_id">
-							<input type="text" id="pswd1" name="pswd1" class="int" maxlength="20" placeholder="숫자영문 조합 8~16글자">
+							<input type="password" id="pw" name="pw" class="int" maxlength="20" placeholder="숫자영문 조합 8~16글자">
 							<span class="step_url"><i class="fas fa-unlock-alt"></i></span>
 							
 							
 						</span>
-						<span class="error_next_box">필수 정보입니다.</span>
+						<span class="pwAjax" >필수 정보입니다.</span>
 					</div>
 
 					 <div class="join_row">
@@ -269,21 +273,22 @@
 							<label for="pswd1">비밀번호</label>							
 						</h3>
 						<span class="ps_box int_pass">
-							<input type="password" id="pswd1" name="pswd1" class="int" maxlength="20" placeholder="숫자영문 조합 8~16글자">
+							<input type="password" id="npw" name="npw" class="int" maxlength="20" placeholder="숫자영문 조합 8~16글자">
 							<span class="step_url"><i class="fas fa-unlock"></i></span>
 							
 						</span>
-						<span class="error_next_box">필수 정보입니다.</span>
+						<span class="pwAjax" >필수 정보입니다.</span>
 					
 						<h3 class="join_title">
 							<label for="pswd2">비밀번호 재확인</label>							
 						</h3>
 						<span class="ps_box int_pass">
-							<input type="password" id="pswd2" name="pswd2" class="int" maxlength="20"placeholder="패스워드를 다시 입력해주세요.">
+							<input type="password" id="nrpw" name="nrpw" class="int" maxlength="20"placeholder="패스워드를 다시 입력해주세요.">
 							<span class="step_url"><i class="fas fa-unlock-alt"></i></span>
 							
+							
 						</span>
-						<span class="error_next_box">필수 정보입니다.</span>
+						<span class="pwAjax">필수 정보입니다.</span>
 					</div> 
 					
 			
@@ -298,7 +303,7 @@
 						<div class="btn_double_area">
 					<span class="button_wrap">
 						<button class="btn_type">취소하기</button> 
-						<button class="btn_type">수정하기</button> 
+						<button class="btn_type" id="btn_agree">수정하기</button> 
 						
 					</span>
 						</div>
@@ -332,25 +337,129 @@
 								</div>
 							</div>
 						</footer>
+<script type="text/javascript" src="js/validation.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 <script type="text/javascript">
-	$(document).on("blur" ,"pw_now", function(){
+	$(document).ready(function(){
+		var currentPw = false;
+		var newPwEq = false;
 		
-		var nowPw = $("#pw_now").val();
-		var nowId ="${sessionScope.loginUser.id}";
 		
-		if(nowPw != null || nowPw.length != 0) {
-			$.ajax({
-				url: 'pwCheck.retro',
-				type: 'POST',
-				dataType: 'json',
-				data: 'id=' +nowId+'&pw'+nowPw,
-				success: function(data){
-					
-				},
-			});
-		}
+		
+		$('#pw').blur(function(nowId, nowPw){
+			var nowPw = $("#pw").val();
+			var nowId ="${sessionScope.loginUser.id}";								
+			if(nowPw != null || nowPw.length != 0) {
+				currrentPw = ajaxPwCheck(nowId, nowPw);
+				
+			}
+		});
+		
+		$('#npw').blur(function(){
+			var memPw = $.trim($('#npw').val());	
+			var memRpw =$.trim($('#nrpw').val());	 
+			var checkResult = joinValidate.checkPw(memPw, memRpw);
+			
+			if(checkResult.code != 0) {
+				$('.pwAjax').eq(1).text(checkResult.desc)
+									.css("display", "block")	
+                					.css("color", "tomato");	
+				return false;
+			}else {
+				$('.pwAjax').eq(1).text(checkResult.desc)
+									  .css("display", "block")	
+									  .css("color", "dodgerblue");
+				if(memRpw != "" || memRpw.length != 0){
+					if(memPw == memRpw){
+						$('.pwAjax').eq(2).text('비밀번호가 일치합니다.')
+                                               .css("display", "block")	
+                                               .css("color", "dodgerblue");
+						newPwEq = true;
+					} else {
+						$('.pwAjax').eq(2).text('입력하신 비밀번호가 일치하지 않습니다.')
+                       							    .css("display", "block")	
+                       							    .css("color", "tomato");
+						newPwEq = false;
+						return false;
+					}
+				}	
+				return true;
+			}	
+			return false;
+								
+		});	
+		
+		$('#nrpw').blur(function(){
+			var memPw = $.trim($('#npw').val());	//1234
+			var memRpw =$.trim($('#nrpw').val());	 
+			var checkResult = joinValidate.checkRpw(memPw, memRpw);
+			
+			if(checkResult.code != 0) {
+				$('.pwAjax').eq(2).text(checkResult.desc)
+									.css("display", "block")	
+                					.css("color", "tomato");	
+				return false;
+			}else {
+				$('.pwAjax').eq(2).text(checkResult.desc)
+									.css("display", "block")	
+									.css("color", "dodgerblue");
+				if(memPw != "" || memPw.length != 0){
+					if(memPw == memRpw){
+						$('.pwAjax').eq(1).text('비밀번호가 일치합니다.')
+                                               .css("display", "block")	
+                                               .css("color", "dodgerblue");
+						newPwEq = true;
+					} else {
+						$('.pwAjax').eq(1).text('입력하신 비밀번호가 일치하지 않습니다.')
+                       							  .css("display", "block")	
+                       							  .css("color", "tomato");
+						newPwEq = false;
+						return false;
+					}
+				}	
+				return true;
+			}	
+			return false;					
+			
+		});		
+						
+		
+		
+		$('#btn_agree').click(function(){
+			var postPw = $('#pw').val();
+			var newPw = $('#npw').val();
+			
+			// 1. 현재 비밀번호가 맞는지 확인			
+			if(!currentPw) {
+				$('#pw').focus();
+				return false;
+			}else if(!newPwEq) {
+				// 2. 새비밀번호와 새비밀번호확인 유효성 체크
+				$('#npw').focus();
+				 
+				return false;
+				
+			}else if(postPw == newPw) {
+				$('#npw').focus();
+				 $('.pwAjax').eq(1).text('현재 비밀번호와 다르게 입력해주세요.')
+											.css("display", "block")	
+											.css("color", "tomato");
+				return false;
+			}
+			
+			
+			
+			// 3. 현재비밀번호와 새비밀번호 같은지 체크 
+			
+			
+			 $('#frm_mem').submit(); 
+		});	
+		
 	});
+	
+
+		
+	
 	
 	
 </script>

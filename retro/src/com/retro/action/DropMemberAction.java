@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class PwUpdateAction implements Action{
+public class DropMemberAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "pwupdate.jsp";
+		String url = "member_delete.jsp";
 		
 		HttpSession session = request.getSession();
 		
@@ -29,7 +29,6 @@ public class PwUpdateAction implements Action{
 		//로그인 된 유저만 회원 수정수정가능.
 		
 		return forward;
-		
 	}
 
 }

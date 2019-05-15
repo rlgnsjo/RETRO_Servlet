@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.retro.dao.MemberDAO;
 
 public class PwCheckAction implements Action{
@@ -19,8 +21,11 @@ public class PwCheckAction implements Action{
 		MemberDAO mDao = MemberDAO.getInstance();
 		boolean flag = mDao.pwCheck(id,pw);
 		
-		
-		
+		JSONObject jObj = new JSONObject();	
+		jObj.put("flag", flag);
+		response.setContentType("application/x-json; charset= UTF-8");
+		response.getWriter().print(jObj);
+				
 		return null;
 	}
 

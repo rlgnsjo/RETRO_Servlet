@@ -150,7 +150,7 @@ a {
 	color: #8e8e8e;
 }
 
-.error_next_box {
+.pwupdate_err_msg {
 	display: none;
 	margin: 9px 0 -2px;
 	font-size: 12px;
@@ -375,15 +375,15 @@ input, select {
 				<span><b><span>RETRO</span></b></span>
 			</p>
 			<p>
-				<br />정말로 탈퇴하시겠습니까?
+				<br/>정말로 탈퇴하시겠습니까?
 			</p>
 			<p>
-				<br />
+				<br/>
 			</p>
 			<div id="modal_btn" onClick="close_pop();">
 				<span class="pop_bt" style="font-size: 13pt;">
 					<button class="modal_btn">취소하기</button>
-					<button class="modal_btn">탈퇴하기</button>
+					<button class="modal_btn btn_agree">탈퇴하기</button>
 				</span>
 			</div>
 		</div>
@@ -419,11 +419,11 @@ input, select {
 								<label for="pswd1">비밀번호재확인</label>
 							</h3>
 							<span class="ps_box int_pass"> <input type="password"
-								id="pswd1" name="pswd1" class="int" maxlength="20"
+								id="pw" name="pswd1" class="int" maxlength="20"
 								placeholder="숫자영문 조합 8~16글자"> <span class="step_url"><i
 									class="fas fa-unlock"></i></span>
 
-							</span> <span class="error_next_box">필수 정보입니다.</span>
+							</span> <span class="pwAjax">필수 정보입니다.</span>
 
 						</div>
 
@@ -435,8 +435,8 @@ input, select {
 
 						<div class="btn_double_area">
 							<span class="button_wrap">
-								<button type="button" class="btn_type">취소하기</button>
-								<button type="button" class="btn_type">탈퇴하기</button>
+								<button type="button" class="btn_type" id="yes_btn">취소하기</button>
+								<button type="button" class="btn_type btn_agree" id="yes_btn">탈퇴하기</button>
 
 							</span>
 						</div>
@@ -466,14 +466,43 @@ input, select {
 			</div>
 		</div>
 	</footer>
+	<script type="text/javascript" src="js/validation.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 	<script type="text/javascript">
 		$(document).ready(function(){
+			var state = false;
 			
-			$('.btn_type').eq(1).click(function(){
-				$('.modal').css('display', 'block');
-				
+			$('#pw').blur(function(){
+				var nowId ="${sessionScope.loginUser.id}";	
+				var nowPw = $(this).val();				
+				state = ajaxPwCheck(nowId, nowPw);
+				alert(state);
 			});
+			
+			$('.btn_agree').click(function(){
+				alert(state);
+				if(state) {
+					$('.modal').css('display','block');
+				} else {
+					$('#pw').focus;
+				}				
+			});
+			$('.btn_agree').click(function(){
+				/* var id = "${sessionScope.loginUser.id}";	
+				locatin.href= "dropMember.retro"; */
+				
+				location.href="dropMemberPlay.retro";
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			$('.modal_btn').eq(0).click(function(){
 				$('.modal').css('display', 'none');
 				

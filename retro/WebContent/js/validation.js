@@ -120,16 +120,25 @@ var joinValidate = {
 				return this.resultCode.space_length_val;						
 			} else if(!pwreg.test(memPw)) {				
 				return this.resultCode.invalid_pw;
-			} else {
-				if(memRpw != null || memRpw.length != 0){
-					if(memPw == memRpw){
-					$('.error_next_box').eq(2).text(this.resultCode.other_pw.desc)
-                                               .css("display", "block")	
-                                               .css("color", "dodgerblue");
-					}
-				}
+			} else {				
 				return this.resultCode.success_pw;
 			}
+		},
+		checkRpw : function(mempw,memRpw ) {
+			var regEmpty = /\s/g; 					 
+		 	var pwreg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+		 	 
+		 	if(memRpw == "" || memRpw.length == 0) {
+				return this.resultCode.empty_val;					
+			} else if(memRpw.match(regEmpty)){
+				return this.resultCode.space_length_val;						
+			} else if(!pwreg.test(memRpw)) {				
+				return this.resultCode.invalid_pw;
+			} else {				
+				return this.resultCode.success_pw;
+			}
+		 	 
+		 	 
 		}
 }
 	
@@ -170,7 +179,33 @@ function ajaxCheck(memId) {
 
 
 
-
+function ajaxPwCheck(nowId, nowPw) {
+	var return_val = false;
+	$.ajax({
+		url: 'pwCheck.retro',
+		type: 'POST',
+		async: false,
+		dataType: 'json',
+		data: 'id=' +nowId+'&pw='+nowPw,
+		success: function(data){
+			if(data.flag){				
+				$(".pwAjax").eq(0).css('color','dodgerblue')
+						    	   .css('display','block')
+							 	   .text("비밀번호가 일치합니다.");	
+				return_val = true;
+			} else {				
+				$(".pwAjax").eq(0).css('color','tomato')
+			 						.css('display','block')
+							 		.text("비밀번호가 일치하지 않습니다.");	
+				return_val = false;
+			}
+		},
+		error:function() {
+			alert("system error");
+		}		
+	});
+	return return_val;
+}
 
 
 

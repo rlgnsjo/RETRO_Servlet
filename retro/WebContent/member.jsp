@@ -545,44 +545,54 @@
 						$('.error_next_box').eq(1).text(checkResult.desc)
 											.css("display", "block")	
     										.css("color", "dodgerblue");
+						if(memRpw != "" || memRpw.length != 0){
+							if(memPw == memRpw){
+								$('.error_next_box').eq(2).text('비밀번호가 일치합니다.')
+		                                               .css("display", "block")	
+		                                               .css("color", "dodgerblue");
+							} else {
+								$('.error_next_box').eq(2).text('입력하신 비밀번호가 일치하지 않습니다.')
+                               							  .css("display", "block")	
+                               							  .css("color", "tomato");
+								return false;
+							}
+						}	
 						return true;
 					}	
 					return false;
 										
 				});	
 				
-				$('#pswd2').blur(function(){	
-					var pw = $.trim($("#pswd1").val());
-					var rpw = $.trim($(this).val());		
+				$('#pswd2').blur(function(){
+					var memPw = $.trim($('#pswd1').val());	
+					var memRpw =$.trim($('#pswd2').val());	 
+					var checkResult = joinValidate.checkRpw(memPw, memRpw);
 					
-					 var regEmpty = /\s/g; 					 
-				 	 var pwreg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
-					
-					if(rpw == "" || rpw.length == 0) {
-						$('.error_next_box').eq(2).text("필수 입력 정보입니다.")
-                      		  					  .css("display", "block")	
-                                                  .css("color", "tomato");								
-						return false;						
-					} else if(rpw.match(regEmpty)){
-						$('.error_next_box').eq(2).text("공백없이 작성해 주세요.")
-	  					  						   .css("display", "block")	
-                      							   .css("color", "tomato");	
-						return false;						
-					}else if(!pwreg.test(rpw)) {
-						$('.error_next_box').eq(2).text("올바른 비밀번호를 입력해주세요.")
- 						                          .css("display", "block")	
-                        		                  .css("color", "tomato");	
-						return false;
-					}else if(pw != rpw) {
-						$('.error_next_box').eq(2).text("입력하신 비밀번호가 일치하지 않습니다.")
-                                                  .css("display", "block")	
-		                                          .css("color", "tomato");
+					if(checkResult.code != 0) {
+						$('.error_next_box').eq(2).text(checkResult.desc)
+											.css("display", "block")	
+                        					.css("color", "tomato");	
 						return false;
 					}else {
-						$('.error_next_box').eq(2).text("올바른 비밀번호 입니다.")
-					                              .css("display", "block")	
-				                                  .css("color", "dodgerblue");						
-                     }
+						$('.error_next_box').eq(2).text(checkResult.desc)
+											.css("display", "block")	
+    										.css("color", "dodgerblue");
+						if(memPw != "" || memPw.length != 0){
+							if(memPw == memRpw){
+								$('.error_next_box').eq(1).text('비밀번호가 일치합니다.')
+		                                               .css("display", "block")	
+		                                               .css("color", "dodgerblue");
+							} else {
+								$('.error_next_box').eq(1).text('입력하신 비밀번호가 일치하지 않습니다.')
+                               							  .css("display", "block")	
+                               							  .css("color", "tomato");
+								return false;
+							}
+						}	
+						return true;
+					}	
+					return false;					
+					
 				});
 				
 				$('#name').blur(function(){										
