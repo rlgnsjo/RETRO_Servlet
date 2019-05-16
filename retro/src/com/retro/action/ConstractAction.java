@@ -13,7 +13,7 @@ public class ConstractAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "constract.jsp";
+		String url = "member/constract.jsp";
 		
 		ActionForward  forward = new ActionForward(); 
 		forward.setpath(url);  // 경로를 찾아감. 액션포워드의 setpath 메서드를 탐. 

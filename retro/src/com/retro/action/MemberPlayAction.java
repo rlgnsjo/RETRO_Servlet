@@ -28,6 +28,7 @@ public class MemberPlayAction implements Action{
 		String addr2 = request.getParameter("addr2");
 		MemberDTO mDto = new MemberDTO(id, pw, name, phone, email, zipcode, addr1, addr2);
 		
+		
 	
 		System.out.println(mDto.toString());
 		

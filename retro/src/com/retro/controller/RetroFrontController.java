@@ -18,6 +18,7 @@ import com.retro.action.IdCheckAction;
 import com.retro.action.IndexAction;
 import com.retro.action.LoginAjaxAction;
 import com.retro.action.LoginOutAction;
+import com.retro.action.LoginPageAction;
 import com.retro.action.LogoutAjaxAction;
 import com.retro.action.MemberAction;
 import com.retro.action.MemberPlayAction;
@@ -107,8 +108,13 @@ public class RetroFrontController extends HttpServlet {
 		} else if (command.equals("/dropMemberPlay.retro")) {
 			action = new DropMemberPlayAction(); 
 			forward = action.excute(request, response); 
+		} else if (command.equals("/loginPage.retro")) {
+			action = new LoginPageAction(); 
+			forward = action.excute(request, response); 
 		}
 
+		
+		
 		if (forward != null) {
 
 			if (forward.isRedirect()) {

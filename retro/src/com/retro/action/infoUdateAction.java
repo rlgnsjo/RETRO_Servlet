@@ -12,7 +12,7 @@ public class infoUdateAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "update.jsp";
+		String url = "member/update.jsp";
 		
 		HttpSession session = request.getSession();
 		

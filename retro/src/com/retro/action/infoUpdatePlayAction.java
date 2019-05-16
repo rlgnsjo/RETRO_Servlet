@@ -15,7 +15,7 @@ public class infoUpdatePlayAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "member.jsp";
+		String url = "member/member.jsp";
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pswd1");

@@ -37,7 +37,7 @@
 			<c:choose>
 				<c:when test="${empty sessionScope.loginUser}" >
 					<li><a href="${path}/constract.retro" id="login_btn">회원가입</a></li>
-					<li><a href="login.jsp">로그인</a></li>
+					<li><a href="${path}/loginPage.retro">로그인</a></li>
 				</c:when>
 				<c:otherwise>
 					<li><a href="#">${sessionScope.loginUser.name}</a>(${sessionScope.loginUser.id})</li>

@@ -11,7 +11,7 @@ public class MemberAction implements Action{
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "member.jsp";
+		String url = "member/member.jsp";
 		
 		ActionForward  forward = new ActionForward(); 
 		forward.setpath(url);  // 경로를 찾아감. 액션포워드의 setpath 메서드를 탐. 
