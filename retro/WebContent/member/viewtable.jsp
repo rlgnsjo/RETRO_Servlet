@@ -14,7 +14,7 @@
 	/* 전체를 감사주는 부분! */
 	.content {
 		font-family: 'Nanum Gothic', sans-serif;
-		width: 1000px;
+		width: 1100px;
 		height: 800px;
 		box-sizing: border-box;
 		border: 1px solid #FFE3EE;
