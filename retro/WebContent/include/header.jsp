@@ -120,6 +120,11 @@
 						 	<a href= "#">Swarovski</a>					 		
 						</div>
 					</li>
+					<li class="dropdown"><a href="#"> 게시판 </a>
+						<div class= "dropdown_content">
+						 	<a href= "${path}/viewtable.retro">게시판</a>						 				 		
+						</div>
+					</li>
 				</ul>
 
 			</div>

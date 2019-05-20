@@ -25,6 +25,7 @@ import com.retro.action.MemberPlayAction;
 import com.retro.action.PwCheckAction;
 import com.retro.action.PwUpdateAction;
 import com.retro.action.PwUpdatePlayAction;
+import com.retro.action.ViewTableAction;
 import com.retro.action.infoUdateAction;
 import com.retro.action.infoUpdatePlayAction;
 
@@ -110,6 +111,9 @@ public class RetroFrontController extends HttpServlet {
 			forward = action.excute(request, response); 
 		} else if (command.equals("/loginPage.retro")) {
 			action = new LoginPageAction(); 
+			forward = action.excute(request, response); 
+		} else if (command.equals("/viewtable.retro")) {
+			action = new ViewTableAction(); 
 			forward = action.excute(request, response); 
 		}
 

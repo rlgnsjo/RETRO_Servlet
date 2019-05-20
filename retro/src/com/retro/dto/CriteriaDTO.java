@@ -1,0 +1,77 @@
+package com.retro.dto;
+
+public class CriteriaDTO {  // 기준 DTO! 한페지에 있는 게시물들! 
+	private int page;				// 페이지 번호 기본값 1 x가 입력되면 x가 입력됨. 
+	private int perPageNum;         // 한페이지에 보여줄 게시글 수를 기본적으로  10개씩 출력해주기 위해 사용. 
+	private String keyword; 	    // 검색 키워드 
+	private String search_option;   // 검색타입
+	private String sort_type;       // 정렬타입 
+	
+	public CriteriaDTO() {
+		this.page =1;
+		this.perPageNum = 10;
+	}
+		
+
+	public CriteriaDTO(int page, int perPageNum, String keyword, String search_option, String sort_type) {
+		super();
+		this.page = page;
+		this.perPageNum = perPageNum;
+		this.keyword = keyword;
+		this.search_option = search_option;
+		this.sort_type = sort_type;
+	}
+
+
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		if(page <= 0) {
+			this.page = 1;
+			return;
+		}
+		this.page = page;  
+		
+	}
+	
+	public int getPageStart() {
+		return (((this.page -1 ) * perPageNum) +1);
+	}
+
+	public int getPerPageNum() {
+		return this.page * perPageNum;
+	}
+
+	public void setPerPageNum(int perPageNum) {
+		this.perPageNum = perPageNum;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getSearch_option() {
+		return search_option;
+	}
+
+	public void setSearch_option(String search_option) {
+		this.search_option = search_option;
+	}
+
+	public String getSort_type() {
+		return sort_type;
+	}
+
+	public void setSort_type(String sort_type) {
+		this.sort_type = sort_type;
+	}
+	
+}
+	 

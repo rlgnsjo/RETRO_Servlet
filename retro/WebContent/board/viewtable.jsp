@@ -125,8 +125,8 @@
 		
 	}
 	.retrotable td {
-	    width: 350px;	    
-	    padding: 10px;
+	    width: 350px;	
+	    padding: 10px;    	   
 	    text-align: center;
 	    vertical-align: top;
 	    border-top:1px solid #FFB6C1;
@@ -192,14 +192,42 @@
 		#search_btn{
 			font-size: 15px;
 			text-decoration: none;
-		}  
+		} 
+		.replyCnt_Color {
+			background-color: #FF5675;
+			font-size: 11px;
+			color: white;
+			border-radius: 25px;
+			padding: 2px 5px;				
+		}
+		
+		
+		
+		.new_time {
+			background-color: #FF69B4;
+			font-size: 11px;
+			color: white;
+			border-radius: 25px;
+			padding: 2px 5px;
+			animation-name: twinkle;
+			animation-duration: 1.2s;
+			animation-iteration-count: infinite;		
+		} 
+		
+		@keyframes twinkle {
+			0% 	{opacity: 0;}
+			100% {opacity: 1;}		
+		}
+				
 
 		/* 페이지 이동을 숫자버튼으로 알려주는 부분.  */
 		.pagination {
 		  display: block;
 		  text-align: center;
 		  margin: 0 auto;
-		  width: 198px;
+		  width: 600px;
+		  list-style: none;
+		 
 
 		}
 		.pagination a {
@@ -211,6 +239,7 @@
 		  text-decoration: none;
 		  transition: background-color .3s;
 		  border: 1px solid #ddd;
+		   list-style: none;
 		}
 
 		.pagination a.active {
@@ -254,18 +283,43 @@
 		        <th>첨부</th>
 		    </tr>
 	    </thead>
+	    <c:forEach items= "${list}" var="bDto"> 
+	    	<!-- 현재 시간 구하기. -->
+	    	<jsp:useBean id="now" class="java.util.Date"/>
+	    	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+	    	<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
+		    <tr>
+		        <th class="nmb">${bDto.bno}</th>
+		        		      
+		        <td>${bDto.title}
+		        <c:if test="${bDto.replycnt > 0}">
+		        	<span class="replyCnt_Color">${bDto.replycnt}</span>
+		        </c:if>
+		        <c:if test="${today == regdate}">
+		        <span class="new_time">New</span>
+		        </c:if>
+		        </td>
+		        
+		          <td>${bDto.writer}</td>		     
+		        <td>${bDto.viewcnt}</td>
+		        <td>${bDto.goodcnt}<i class="fas fa-heart"></i></td>
+		      	<td> 
+		      	 <c:choose>
+		      	 	<c:when test="${today == regdate}">
+		      	 		<fmt:formatDate pattern="hh:mm:ss" value="${bDto.regdate}"/> 
+		      	 	</c:when>
+		      	 	<c:otherwise>
+		      	 		<fmt:formatDate pattern="yyyy-MM-dd" value="${bDto.regdate}"/> 
+		      	 	</c:otherwise>		      	 
+		      	 </c:choose>	 		
+		       </td>
+		        <td>${bDto.filename} <i class="far fa-file-alt"></i></td>	        
+		    </tr>
+	    </c:forEach>
 	    <tbody>
-	    <tr>
-	        <th class="nmb">101</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>혼다히토미</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
+	    
 
-	    <tr>
+	    <!-- <tr>
 	        <th class="nmb">102</th>
 	        <td>내용이 들어갑니다.</td>
 	        <td>조유리</td>
@@ -346,21 +400,46 @@
 	        <td>15 <i class="fas fa-heart"></i></td>
 	        <td >2019-05-17</td>
 	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
+	    </tr> -->
 
 	    </tbody>
 	</table>
 	<!-- x테이블 종료!@ -->	
 	<div class="pagination_box">
 		<div class="pagination" id="pani">
-		  <a href="#">&laquo;</a>
-		  <a href="#">1</a>
-		  <a href="#" class="active">2</a>
-		  <a href="#">3</a>
-		  <a href="#">4</a>
-		  <a href="#">5</a>
-		  <a href="#">6</a>
-		  <a href="#">&raquo;</a>
+						
+		<c:if test="${pageMaker.prev}">		 
+		  <li>
+		 	<a href="${path}/viewtable.retro?page=${pageMaker.startPage -1}">&laquo;</a>		 	
+		 </li>
+		 <li>
+		 	<a href="${path}/viewtable.retro?page=1">1</a>		 	
+		 </li>	
+		 <li>
+		 	<a>...</a>
+		 </li>	 
+		 </c:if>
+		
+		
+		
+		<c:forEach begin="${pageMaker.startPage}"
+		end="${pageMaker.endPage}" var="idx">		
+		<li>
+		 <%--  <a href="#"></a>   --%>		  			     
+		  <a href="${path}/viewtable.retro?page=${idx}&flag=${flag}$keyword=${keyword}&key=${code}" <c:out value="${pageMaker.criDto.page == idx ? 'class=active':''}" />>${idx}</a>		  
+		 </li> 
+		 </c:forEach> 
+		 <c:if test="${pageMaker.next}">
+		 <li>
+		 	<a>...</a>
+		 </li>
+		  <li>
+		 	<a href="${path}/viewtable.retro?page=${pageMaker.finalPage}">${pageMaker.finalPage}</a>		 	
+		 </li>
+		 <li>
+		 	<a href="${path}/viewtable.retro?page=${pageMaker.endPage+ 1}">&raquo;</a>		 	
+		 </li>		 
+		 </c:if>
 		</div>
 	</div>
 	<div id="div_search">
@@ -374,7 +453,6 @@
 		<input type="text" placeholder="검색할 값을 입력하세요." id="search_board" name="search_board">
 		<a href="#" id="search_btn" class="btn btn_search">검색</a>
 	</div>
-
 
 </div>	
 <%@ include file="../include/footer.jsp"%>

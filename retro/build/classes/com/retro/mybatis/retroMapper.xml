@@ -64,4 +64,29 @@
      	 WHERE id= #{id}    	    
      </delete>
 
+	<!--게시판 sql문 작성 시작!  -->
+	<select id="totalCount" resultType="int">
+	 SELECT COUNT(BNO)
+	 FROM tbl_board 
+	 WHERE bno > 0	
+	</select>
+	
+	
+	
+	
+	<select id="listAll" resultType="com.retro.dto.BoardDTO" >
+		 SELECT * 
+		 FROM (SELECT rownum rnum, a.*
+		      FROM (select * 
+		      from tbl_board
+		      WHERE bno >0 
+		      ORDER BY bno DESC
+		      ) a
+		    )
+		WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}   <!--pagestart는 getpageStart에 담기고 perPageNum은 getperPageNum에 담음.  -->
+	</select>
+	
+	<!-- 최신순 new  -->
+	
+
 </mapper>
