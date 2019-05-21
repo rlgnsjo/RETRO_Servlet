@@ -40,6 +40,7 @@ public class RetroFrontController extends HttpServlet {
 		super();
 	}
 
+	/* 전화국의 교환원 역할을 하는 컨트롤러 기능만함. */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -113,8 +114,8 @@ public class RetroFrontController extends HttpServlet {
 			action = new LoginPageAction(); 
 			forward = action.excute(request, response); 
 		} else if (command.equals("/viewtable.retro")) {
-			action = new ViewTableAction(); 
-			forward = action.excute(request, response); 
+			action = new ViewTableAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행
 		}
 
 		

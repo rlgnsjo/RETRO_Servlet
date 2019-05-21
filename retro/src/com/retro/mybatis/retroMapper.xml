@@ -68,19 +68,55 @@
 	<select id="totalCount" resultType="int">
 	 SELECT COUNT(BNO)
 	 FROM tbl_board 
-	 WHERE bno > 0	
+	 WHERE bno > 0
+       <if test="search_option == 1">
+       AND title LIKE '%' ||#{keyword} ||'%' OR content LIKE '%'||#{keyword} ||'%' 
+       </if>
+       <if test="search_option == 2">
+     	AND title LIKE '%' ||#{keyword} ||'%'
+       </if>
+       <if test="search_option == 3">
+     	AND content LIKE '%' ||#{keyword} ||'%'
+       </if>
+       <if test="search_option == 4">
+      	AND	writer LIKE '%' ||#{keyword} ||'%'
+       </if>	
 	</select>
 	
 	
-	
-	
+<!-- 	현재 이값에서는 cridto에 담겨져 있는 매개변수가 담겨있음. preparedstament 방식임 -->
+	<!-- 동적쿼리 이용을 위해서 sql문안에 if문을 작성한다. -->
 	<select id="listAll" resultType="com.retro.dto.BoardDTO" >
 		 SELECT * 
 		 FROM (SELECT rownum rnum, a.*
 		      FROM (select * 
-		      from tbl_board
+		      from tbl_board		      
 		      WHERE bno >0 
-		      ORDER BY bno DESC
+		       <if test="search_option == 1">
+		       AND title LIKE '%' ||#{keyword} ||'%' OR content LIKE '%'||#{keyword} ||'%' 
+		       </if>
+		       <if test="search_option == 2">
+		     	AND title LIKE '%' ||#{keyword} ||'%'
+		       </if>
+		       <if test="search_option == 3">
+		     	AND content LIKE '%' ||#{keyword} ||'%'
+		       </if>
+		       <if test="search_option == 4">
+		      	AND	writer LIKE '%' ||#{keyword} ||'%'
+		       </if>
+		       	      				      		
+		      <if test="sort_type == 'new'">
+		      	ORDER BY bno DESC
+		      </if>
+		      <if test="sort_type == 'good'">
+		      	ORDER BY goodcnt DESC, bno DESC
+		      </if>	
+		      <if test="sort_type == 'reply'">
+		      	ORDER BY replycnt DESC, bno DESC
+		      </if>
+		      <if test="sort_type == 'view'">
+		      	ORDER BY viewcnt DESC, bno DESC
+		      </if>		     	      		    
 		      ) a
 		    )
 		WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}   <!--pagestart는 getpageStart에 담기고 perPageNum은 getperPageNum에 담음.  -->

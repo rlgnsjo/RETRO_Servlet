@@ -15,7 +15,7 @@
 	.content {
 		font-family: 'Nanum Gothic', sans-serif;
 		width: 1100px;
-		height: 800px;
+		height: 830px;
 		box-sizing: border-box;
 		border: 1px solid #FFE3EE;
 		border-radius: 24px;
@@ -257,6 +257,9 @@
 		}
 
 	</style>
+	
+
+	
 </head>
 <body>
 	<%@  include file="../include/header.jsp"%>
@@ -264,10 +267,10 @@
 	<h3 class="qu_title">질문 게시판</h3>
 	<div>
 		<div id="order_board">
-			<span><a href="#" id="orderNew">최신순</a></span>
-			<span><a href="#" id="orderGood">추천순</a></span>
-			<span><a href="#" id="orderReply">댓글순</a></span>
-			<span><a href="#" id="orderCnt">조회순</a></span>
+			<span><a href="${path}/viewtable.retro?sort_type=new&search_option=${search_option}&keyword=${keyword}" id="orderNew">최신순</a></span>
+			<span><a href="${path}/viewtable.retro?sort_type=good&search_option=${search_option}&keyword=${keyword}" id="orderGood">추천순</a></span>
+			<span><a href="${path}/viewtable.retro?sort_type=reply&search_option=${search_option}&keyword=${keyword}" id="orderReply">댓글순</a></span>
+			<span><a href="${path}/viewtable.retro?sort_type=view&search_option=${search_option}&keyword=${keyword}" id="orderCnt">조회순</a></span>
 		</div>						
 		<button class="btn btn-primary" id="boardAdd">게시글 등록</button>
 	</div>
@@ -283,11 +286,12 @@
 		        <th>첨부</th>
 		    </tr>
 	    </thead>
-	    <c:forEach items= "${list}" var="bDto"> 
-	    	<!-- 현재 시간 구하기. -->
-	    	<jsp:useBean id="now" class="java.util.Date"/>
+	    <c:forEach items= "${list}" var="bDto">    <!-- jsp페이지에서 자바코드를 쉽게 작성하게 해주기 위한 jstl 태그 items가 액션에서 보낸 데이터 -->
+	    	<!-- 현재 시간 구하기. -->                     <!--  이 값을 bDto에 담아준다.   -->
+	    	<jsp:useBean id="now" class="java.util.Date"/>  <!-- 현재라는 변수가 now라는 id에 담겨있음 -->
 	    	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-	    	<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
+	    	 <!-- jstl태그중 날짜값으로 변경해주기 위해 format을 사용!  패턴은 ex 2018 05  18  pattern="yyyy-MM-dd" -->
+	    	<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/> 	    	
 		    <tr>
 		        <th class="nmb">${bDto.bno}</th>
 		        		      
@@ -305,7 +309,7 @@
 		        <td>${bDto.goodcnt}<i class="fas fa-heart"></i></td>
 		      	<td> 
 		      	 <c:choose>
-		      	 	<c:when test="${today == regdate}">
+		      	 	<c:when test="${today == regdate}">  <!-- 오늘날짜랑 같은 경우만 시분초를 띄워줘라. -->
 		      	 		<fmt:formatDate pattern="hh:mm:ss" value="${bDto.regdate}"/> 
 		      	 	</c:when>
 		      	 	<c:otherwise>
@@ -317,90 +321,15 @@
 		    </tr>
 	    </c:forEach>
 	    <tbody>
-	    
-
-	    <!-- <tr>
-	        <th class="nmb">102</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>조유리</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    
-	    <tr>
-	        <th class="nmb">103</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>김채원</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    <tr>
-	        <th class="nmb">104</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>이채연</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    <tr>
-	        <th class="nmb">105</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>아부키나코</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    <tr>
-	        <th class="nmb">106</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>장원영</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    <tr>
-	        <th class="nmb">107</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>강혜원</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    <tr>
-	        <th class="nmb">108</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>김민주</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    <tr>
-	        <th class="nmb">109</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>신류진</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr>
-	    <tr>
-	        <th class="nmb">110</th>
-	        <td>내용이 들어갑니다.</td>
-	        <td>리아</td>
-	        <td>1</td>
-	        <td>15 <i class="fas fa-heart"></i></td>
-	        <td >2019-05-17</td>
-	        <td><i class="far fa-file-alt"></i></td>	        
-	    </tr> -->
+	    <c:if test="${!empty keyword}">
+			<div id= "search_result">
+				<span class="search_span">"${keyword}"</span>로 검색한 결과는 총
+				<span class="search_span">"${totalCount}"</span>건 입니다.
+			</div>
+		
+		</c:if>
+		
+	  
 
 	    </tbody>
 	</table>
@@ -408,12 +337,12 @@
 	<div class="pagination_box">
 		<div class="pagination" id="pani">
 						
-		<c:if test="${pageMaker.prev}">		 
+		<c:if test="${pageMaker.prev}"> <!--prev값에는 false 값이 담겨있음. test안에는 조건문이 들어가있음.   --> 
 		  <li>
-		 	<a href="${path}/viewtable.retro?page=${pageMaker.startPage -1}">&laquo;</a>		 	
+		 	<a href="${path}/viewtable.retro?page=${pageMaker.startPage -1}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}">&laquo;</a>		 	
 		 </li>
 		 <li>
-		 	<a href="${path}/viewtable.retro?page=1">1</a>		 	
+		 	<a href="${path}/viewtable.retro?page=1&sort_type=${sort_type}">1</a>		 	
 		 </li>	
 		 <li>
 		 	<a>...</a>
@@ -422,32 +351,36 @@
 		
 		
 		
-		<c:forEach begin="${pageMaker.startPage}"
-		end="${pageMaker.endPage}" var="idx">		
+		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">  
+			   	
 		<li>
 		 <%--  <a href="#"></a>   --%>		  			     
-		  <a href="${path}/viewtable.retro?page=${idx}&flag=${flag}$keyword=${keyword}&key=${code}" <c:out value="${pageMaker.criDto.page == idx ? 'class=active':''}" />>${idx}</a>		  
+		  <a href="${path}/viewtable.retro?page=${idx}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}&key=${code}" <c:out value="${pageMaker.criDto.page == idx ? 'class=active':''}" />>${idx}</a>	 
+		 	  
 		 </li> 
 		 </c:forEach> 
-		 <c:if test="${pageMaker.next}">
+		 
+		 
+		 
+		 
+		 <c:if test="${pageMaker.next}">  <!-- 1~10페이지에서  >>버튼을 클릭하면 11로 이동 무조건 endpage에서는 1로 이동 -->
 		 <li>
 		 	<a>...</a>
 		 </li>
 		  <li>
-		 	<a href="${path}/viewtable.retro?page=${pageMaker.finalPage}">${pageMaker.finalPage}</a>		 	
+		 	<a href="${path}/viewtable.retro?page=${pageMaker.finalPage}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}">${pageMaker.finalPage}</a>		 	
 		 </li>
 		 <li>
-		 	<a href="${path}/viewtable.retro?page=${pageMaker.endPage+ 1}">&raquo;</a>		 	
+		 	<a href="${path}/viewtable.retro?page=${pageMaker.endPage+ 1}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}">&raquo;</a>		 	
 		 </li>		 
 		 </c:if>
 		</div>
 	</div>
 	<div id="div_search">
 		<select id="selsearch" name="selsearch">
-			<option value="3" selected="selected">-조건 선택-</option>
-			<option value="1">제목</option>
+			<option value="1"selected="selected">제목+내용</option>
 			<option value="2">내용</option>
-			<option value="3">제목+내용</option>
+			<option value="3">제목</option>
 			<option value="4">작성자</option>
 		</select>
 		<input type="text" placeholder="검색할 값을 입력하세요." id="search_board" name="search_board">
@@ -458,4 +391,43 @@
 <%@ include file="../include/footer.jsp"%>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 	
+	<script type="text/javascript">
+	$(document).ready(function() {
+						
+	 var sort_type = "${sort_type}"; 
+		if(sort_type == "new"){
+			$("#order_board span a").eq(0).css("color", "#FF69B4").css("font-weigt", "bold").css("text-decoration","underline");
+		} else if(sort_type == "good"){
+			$("#order_board span a").eq(1).css("color", "#FF69B4").css("font-weigt", "bold").css("text-decoration","underline");
+		} else if(sort_type == "reply"){
+			$("#order_board span a").eq(2).css("color", "#FF69B4").css("font-weigt", "bold").css("text-decoration","underline");
+		} else if(sort_type == "view"){
+			$("#order_board span a").eq(3).css("color", "#FF69B4").css("font-weigt", "bold").css("text-decoration","underline");
+		}				
+	});
+	$(document).on("click", "#search_btn", function(){
+		var search_option = $('#selsearch').val();
+		var keyword = $('#search_board').val();
+		alert(search_option + "," + keyword);
+		
+		if(keyword == null || keyword.length == 0) {
+			 $('#search_board').focus();
+			 $('#search_board').css('border', '1px solid rgb(231,29,54)');
+			 return false;
+		}
+		location.href= "${path}/viewtable.retro?search_option="+search_option+"&keyword="+keyword;				
+	});
+							
+		
+	</script>
+
+
+
+
+
+
+
+
+
 </html>

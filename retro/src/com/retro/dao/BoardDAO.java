@@ -36,13 +36,13 @@ public class BoardDAO {
 		sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			list = sqlSession.selectList("listAll", criDto);
+			list = sqlSession.selectList("listAll", criDto);  // 현재 list에는 10개 값이 담겨져있다. 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			sqlSession.close();
 		}		
-		return list;
+		return list;  // 매서드가 끝날때는 return을 만났거나 중가로 끝났을때 인데 return에 list값을 담아줘서 보내준다.
 		
 	}
 	

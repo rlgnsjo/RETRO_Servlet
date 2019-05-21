@@ -2,7 +2,7 @@ package com.retro.dto;
 
 
 
-public class PageMakerDTO {
+public class PageMakerDTO {  // 페이지네이션의 이동처리과정을 위해 만들어준 dto
 	private int totalCount;	// 전체데이터 개수  즉 총 게시글수! 280개임.
 	private int startPage;	// 시작 페이지 번호
 	private int endPage;	// 끝 페이지 번호
@@ -17,28 +17,29 @@ public class PageMakerDTO {
 		
 		return totalCount;
 	}
-	public void setTotalCount(int totalCount) {
+	public void setTotalCount(int totalCount) {  // 현재 여기에는 전체게시글 개수가 담겨져있음. 280개
 		this.totalCount = totalCount;
 		
-		calcData();	
+		calcData();	  // 해당클래스에 있으니 사용가능
 	}
 	
-	private void calcData() {
+	private void calcData() {     //criDto에는 내가 입력한 변수값 ex)3이 입력되 있고 displayPageNum에는 10이 할당되 있다. 
 		endPage = (int)Math.ceil(criDto.getPage() / (double)displayPageNum) * displayPageNum;
-		//  ex:2가 입력되었을때      (2 / 10) 0.2 => 1* 10 = 10       
+		//  ex:3가 입력되었을때      (3 / 10) 0.3=> 1* 10 = 10       
 				
 		startPage = (endPage - displayPageNum) + 1;
-		
+		//startPage=1   
 		int tempEndPage = (int)(Math.ceil(totalCount / (double)(criDto.getPerPageNum() / criDto.getPage())));  
-				
+				                                       
 		if(endPage > tempEndPage) {
 		   endPage = tempEndPage;	
 		}
 		
 		prev = startPage == 1 ? false : true;
 		next = (endPage * (criDto.getPerPageNum()/criDto.getPage())) >= totalCount ? false :true;
-	
-		finalPage =	(int)(Math.ceil(totalCount /(double)displayPageNum));	
+		// endPage는 10임 totalCount는 280임.
+		finalPage =	(int)(Math.ceil(totalCount /(double)displayPageNum));
+		// totalCount 280 이고 displayPageNum는 10인데 해당값을 나눠서 finalPage에 할당.  calcDate로 이동
 	}
 	
 	
