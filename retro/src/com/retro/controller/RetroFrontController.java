@@ -115,9 +115,9 @@ public class RetroFrontController extends HttpServlet {
 		} else if (command.equals("/loginPage.retro")) {
 			action = new LoginPageAction(); 
 			forward = action.excute(request, response); 
-		} else if (command.equals("/viewtable.retro")) {
+		} else if (command.equals("/viewtable.retro")) { 
 			action = new ViewTableAction(); // 1. 객체 생성 .
-			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행
+			forward = action.excute(request, response);  //2.replyboard 액션의 excute매서드를 실행
 		} else if (command.equals("/replyboard.retro")) {
 			action = new ReplyBoardAction(); // 1. 객체 생성 .
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행

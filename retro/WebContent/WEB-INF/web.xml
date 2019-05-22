@@ -15,7 +15,8 @@
     <servlet-name>FrontController</servlet-name>
     <servlet-class>com.retro.controller.RetroFrontController</servlet-class>
   </servlet>
-  <servlet-mapping>
+  <servlet-mapping> 
+  			
   <!--11.  url의 끝부분이 .retro으로 끝나면 FrontController로 이동 
            url: idCheck.retro => FrontController로 이동 
            FrontController가 어디있는지 몰라요.. 위를 보시오    -->

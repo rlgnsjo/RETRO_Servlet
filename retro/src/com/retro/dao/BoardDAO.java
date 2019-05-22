@@ -33,12 +33,12 @@ public class BoardDAO {
 		return instance;
 	}
 	
-	// 게시글목록
+	// 게시글목록 (13)
 	public List<BoardDTO> listAll(CriteriaDTO criDto){
 		sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			list = sqlSession.selectList("listAll", criDto);  // 현재 list에는 10개 값이 담겨져있다. 
+			list = sqlSession.selectList("listAll", criDto);  // 14 현재 list에는 10개 값이 담겨져있다. 데이터베이스 사용위한 listAll id 설정
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

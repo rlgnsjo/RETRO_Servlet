@@ -122,7 +122,8 @@
 					</li>
 					<li class="dropdown"><a href="#"> 게시판 </a>
 						<div class= "dropdown_content">
-						 	<a href= "${path}/viewtable.retro">게시판</a>						 				 		
+						 	<a href= "${path}/viewtable.retro">게시판</a>		
+						 	 <!--1. 해당 버튼 클릭시 해당경로로 이동  경로 이동할때 반드시 web,xml이동 -->				 				 		
 						</div>
 					</li>
 				</ul>
