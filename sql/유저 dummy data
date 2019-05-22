@@ -214,6 +214,63 @@ WHERE rnum BETWEEN 1 AND 10;
  
  
  
+DROP SEQUENCE seq_reply;
+CREATE SEQUENCE seq_reply;
+START WITH 1
+INCREMENT BY 1;
+ 
+ 
+DROP TABLE tbl_reply;
+CREATE TABLE tbl_reply(
+    rno NUMBER PRIMARY KEY,
+    content VARCHAR(2000) NOT NULL,
+    writer VARCHAR(30) NOT NULL,
+    regdate DATE DEFAULT SYSDATE,
+    bno NUMBER NOT NULL
+    );
+    
+    
+    
+    
+AlTER TABLE tbl_reply 
+ADD CONSTRAINT tbl_reply_fk_bno
+FOREIGN KEY(bno) REFERENCES tbl_board(bno);
+
+commit;
+
+DELETE FROM tbl_reply;
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',10 );
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',10 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',10 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',3 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',3 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',3 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',10 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',10 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',10 ); 
+INSERT INTO tbl_reply (rno, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'댓글2','user01',10 ); 
+commit;
+
+SELECT * FROM tbl_reply; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  
