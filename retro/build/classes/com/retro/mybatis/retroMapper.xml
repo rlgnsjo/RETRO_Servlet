@@ -122,7 +122,23 @@
 		WHERE rnum BETWEEN #{pageStart} AND #{perPageNum}   <!--pagestart는 getpageStart에 담기고 perPageNum은 getperPageNum에 담음.  -->
 	</select>
 	
-	<!-- 최신순 new  -->
+	<select id="view" parameterType="String" resultType="com.retro.dto.BoardDTO">
+	 SELECT * FROM tbl_board
+	 WHERE bno = #{bno}
 	
+	</select>
+	
+	<!-- 조회수 증가를 위해 작성.  -->
+	<update id="viewCnt" parameterType="String">
+		Update tbl_board
+			SET viewcnt = viewcnt +1
+		WHERE bno = #{bno}	
+	</update>
+	
+	<select id="replyList" parameterType="String" resultType="com.retro.dto.ReplyDTO">
+		SELECT * FROM tbl_reply
+		 WHERE bno = #{bno}
+	
+	</select>
 
 </mapper>

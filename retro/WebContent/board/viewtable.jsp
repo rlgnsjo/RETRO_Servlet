@@ -295,7 +295,7 @@
 		    <tr>
 		        <th class="nmb">${bDto.bno}</th>
 		        		      
-		        <td>${bDto.title}
+		        <td id="repl_ti" onclick="bno_val(${bDto.bno})">${bDto.title}
 		        <c:if test="${bDto.replycnt > 0}">
 		        	<span class="replyCnt_Color">${bDto.replycnt}</span>
 		        </c:if>
@@ -418,7 +418,9 @@
 		}
 		location.href= "${path}/viewtable.retro?search_option="+search_option+"&keyword="+keyword;				
 	});
-							
+	function bno_val(bno) {
+		location.href= "${path}/replyboard.retro?bno=" + bno;
+	}
 		
 	</script>
 
