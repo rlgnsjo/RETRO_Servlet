@@ -25,15 +25,15 @@ public class CommentListAction  implements Action{
 		
 		// 해당 게시글의 댓글 목록을 조회
 		ReplyDAO rDao = ReplyDAO.getInstance();
-		List<ReplyDTO> list = rDao.replyList(bno);
-		
-		request.setAttribute("replyList", list);
+		List<ReplyDTO> list = rDao.replyList(bno);		
+		request.setAttribute("replyList", list);		
 		for (ReplyDTO replyDTO : list) {
 			System.out.println(replyDTO.toString());
 		}
 		
 		ActionForward forward = new ActionForward();
 		forward.setpath(url);
+		
 		forward.setRedirect(false);
 		
 		return forward;
