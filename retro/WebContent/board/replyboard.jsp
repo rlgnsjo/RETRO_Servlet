@@ -594,7 +594,14 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 		});	
 		
 	});
+ 	 
 
+	$(document).on("click", ".btn_like", function(){
+		alert("추천감사합니다.");
+		
+		
+	});
+	
 
 
 
