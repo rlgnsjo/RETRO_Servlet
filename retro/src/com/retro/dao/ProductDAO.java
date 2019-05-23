@@ -45,4 +45,18 @@ public class ProductDAO {
 		}		
 		return list;
 	}
+	
+	public List<ProductDTO> newList() {
+		List<ProductDTO> list = null;
+		sqlSession = sqlSessionFactory.openSession();
+		
+		try {
+			list = sqlSession.selectList("newList");						
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}		
+		return list;
+	}
 }
