@@ -9,7 +9,7 @@
 <style type="text/css">
 </style>
 </head>
-<body>    <!--  9.즉여기의 있는 값이 ajax에서 실행됨  -->
+<body>    <!--  9.즉 여기의 있는 값이 ajax에서 실행됨  -->
 		<div class="chat"> 
 			<div id="conform">
 			<c:if test="${replyList.size() == 0}">
@@ -26,7 +26,7 @@
 						<div class="repl_box">
 							<div class="repl_user">${replyview.writer}</div> <!--6.view.jsp에서 ajax로 호출해줬으니 해당 ajax로 이동  -->
 							
-							<c:if test="${sessionScope.loginUser.id == replyview.writer}">
+							<c:if test="${sessionScope.loginUser.id == replyview.writer}">  <!--2번 해당버튼을 클릭했을때 이벤트 시작  -->
 								<a class="reply_del" data_num="${replyview.rno}">삭제</a>   <!-- data_num : 게시글 삭제시 해당id를 rno변수로 찾아준다. -->
 							</c:if>					 
 							

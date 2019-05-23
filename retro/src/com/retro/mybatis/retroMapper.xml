@@ -147,10 +147,10 @@
 	
 	</insert>
 	
-	<!-- 댓글을 삭제하는 sql문! -->
 	<delete id="replyRemove" parameterType="int">
-		DELETE FROM tbl_reply
-		 WHERE rno = #{rno}
+		 DELETE FROM tbl_reply
+		 WHERE rno = #{rno}	
 	</delete>
+	
 
 </mapper>

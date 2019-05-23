@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+-<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%
    		String referer = request.getHeader("referer");
@@ -573,30 +573,26 @@ function comment_list() {  // 댓글을 페이지전환없이 사용해주기 �
 		type: "post",
 		url: "commentlist.retro",
 		data: "bno=${one.bno}",  			// 게시글번호를 데이터로 보내주고 있음. 해당게시글을 보여주기 위해 사용.
-		success: function(result) {           //7. commlistaction의 url을 해당경로로 담아줌 
+		success: function(result) {           //7. commlistaction의 url을 해당경로로 담아줌  
 			$("#commentList").html(result);  //8.id 가 commentList인 코드를 commenlist jsp 값을 뿌려줌
 		}  
 	});
 }
 	
-	$(document).on("click", ".reply_del", function (){
+	$(document).on("click", ".reply_del", function(){
 		
 		var rno = $(this).attr("data_num");
 		var bno = '${one.bno}';
 		
 		
 		$.ajax({
+			type: "post",
 			url: "replyRemove.retro",
-			type: "POST",
-			data: "rno=" + rno + "&bno=" + bno,  			// 게시글번호를 데이터로 보내주고 있음. 해당게시글을 보여주기 위해 사용.
-			success: function(result) {          		 //7. commlistaction의 url을 해당경로로 담아줌 
-				 comment_list();
-			},
-			error: function() {
-				alert("system Error");
-			}
-		
-		});
+			data: "rno=" + rno + "&bno=" + bno, 			
+			success: function(result) {             
+				comment_list();
+			}  
+		});	
 		
 	});
 

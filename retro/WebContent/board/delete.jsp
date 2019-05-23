@@ -314,7 +314,7 @@
 		nhn.husky.EZCreator.createInIFrame({
 		    oAppRef: oEditors,
 		    elPlaceHolder: "content",
-		    sSkinURI: "/fcryan/smarteditor/SmartEditor2Skin.html",
+		    sSkinURI: "/retro/smarteditor/SmartEditor2Skin.html",
 		    fCreator: "createSEditor2"
 		});
 	</script>

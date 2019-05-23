@@ -132,7 +132,7 @@ public class RetroFrontController extends HttpServlet {
 		} else if (command.equals("/replyRemove.retro")) {
 			action = new ReplyRemoveAction(); // 1. 객체 생성 .
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
-		}
+		} 
 		
 			
 		
