@@ -26,7 +26,9 @@ import com.retro.action.MemberPlayAction;
 import com.retro.action.PwCheckAction;
 import com.retro.action.PwUpdateAction;
 import com.retro.action.PwUpdatePlayAction;
+import com.retro.action.ReplyAddAction;
 import com.retro.action.ReplyBoardAction;
+import com.retro.action.ReplyRemoveAction;
 import com.retro.action.ViewTableAction;
 import com.retro.action.infoUdateAction;
 import com.retro.action.infoUpdatePlayAction;
@@ -123,9 +125,19 @@ public class RetroFrontController extends HttpServlet {
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행
 		} else if (command.equals("/commentlist.retro")) {
 			action = new CommentListAction(); // 1. 객체 생성 .
-			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		} else if (command.equals("/replyAdd.retro")) {
+			action = new ReplyAddAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		} else if (command.equals("/replyRemove.retro")) {
+			action = new ReplyRemoveAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
 		}
-
+		
+			
+		
+		
+		
 		
 		
 		if (forward != null) {

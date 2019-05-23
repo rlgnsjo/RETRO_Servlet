@@ -72,7 +72,7 @@ public class ViewTableAction implements Action {
 		pageMaker.setTotalCount(totalCount);  //pagemakerDTO의 setTotalCount에 담아서 실행!
 		
 		// view단으로 게시글 목록전송
-		request.setAttribute("list", list); //11~20개의 게시글들 
+		request.setAttribute("list", list); 			//11~20개의 게시글들 
 		request.setAttribute("pageMaker", pageMaker);  // calcdate에 계산된 모든값이 담겨있음. 
 		request.setAttribute("totalCount", totalCount);  // 280값(모든페이지의 게시글수)이 담겨져있음. 
 		request.setAttribute("sort_type", sort_type);   //정렬 타입에 값이 담겨있음. new view reply good 

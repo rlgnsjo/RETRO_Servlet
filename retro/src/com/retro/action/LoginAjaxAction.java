@@ -42,7 +42,7 @@ public class LoginAjaxAction implements Action {
 		JSONObject jObj = new JSONObject();
 		jObj.put("message", message);
 		response.setContentType("application/x-json; charset= UTF-8");
-		response.getWriter().print(jObj);
+		response.getWriter().print(jObj);  // ajax에서 받을때 json 방식으로 받았기 때문에 보낼때도 json 방식으로 보내야 한다. 그렇기 때문에 필요한 객체(코드)
 		
 		
 		return null;

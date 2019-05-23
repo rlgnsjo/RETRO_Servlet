@@ -8,7 +8,7 @@ public class CriteriaDTO { 		    // 기준 DTO! 한페지에 있는 게시글의
 	private String sort_type;       // 정렬타입 
 	
 	public CriteriaDTO() {    // (5) 대입연산자를 이용하여 page와perPageNum에 1과 10 을담음.
-		this.page =1;  //this는 전역변수를 뜻함. 
+		this.page =1;  		 //this는 전역변수를 뜻함. 
 		this.perPageNum = 10;
 	}  // 중가로가 끝났으니 호출한곳으로 다시 돌아감.  viewtable 액션으로 이동. 
 		

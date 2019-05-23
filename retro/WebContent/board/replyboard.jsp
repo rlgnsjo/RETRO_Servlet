@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/section.css?v=1">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <title>Insert title here</title>
+
 <style type="text/css">
 		@import url('https://fonts.googleapis.com/css?family=Jua|Nanum+Myeongjo');
 
@@ -463,14 +464,14 @@
 			display: inline-block;
 			border: 1px solid  #FADAE5;		
 			width: 915px;
-			height: 287px;
+			height: 360px;
 			border-radius: 10px;
 			margin-left: 21px;
 			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0  #FFE3EE; 
 					
 		}
 
-		#input{
+		#replyInsert{
 			margin: 12px auto;
 			display: inline-block;
 			border-radius: 6px;
@@ -496,6 +497,27 @@
 		    padding-right: 10px;
 			color: #FF5675;
 		}
+		.reply_list{
+			background-color: #FFB6C1;
+			padding: 5px 15px;
+			font-size: 14px;
+			color: white;
+			border: 2px solid  #FFB6C1;
+		}
+		.reply_del{
+			display: inline-block;
+			background-color: #FFB6C1;
+			padding: 7px 15px;
+			font-size: 14px;
+			border-radius: 25px;
+			color: white;
+			outline: none;
+			border: 0px;
+			/* margin-top:  10px; */
+			/* margin-left: 200px;  */
+			cursor: pointer;
+			text-align: center;
+		}
 
 
 
@@ -514,21 +536,142 @@ $(document).ready(function(){
 	comment_list();
 });
 
-function comment_list() {
+
+
+$(document).on("click", "#reply_btn", function(){
+	oEditors.getById["replyInsert"].
+	exec("UPDATE_CONTENTS_FIELD", []);
+	
+	var content = $("#replyInsert").val();
+
+	if (content == "<p><br></p>") {
+		return false;
+	} else {
+		// 게시글 번호 담아서 보냄.
+		var bno = '${one.bno}';
+		$('#re_bno').val(bno);
+		
+		$.ajax({
+			type: "post",
+			url: "replyAdd.retro",
+			dataType: "json",
+			data: $("#frm_reply").serialize(),  //serialize() 데이터가 많으니 바이트코드로 변환하는 과정을 해줌! (직렬화)
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8', // 직렬화를 과정을 거치니 코드의 규격을 다시정해주는것
+			success: function(data) {
+					comment_list();      //comment_List()를 실행하여 댓글을 수를 변경시켜준다.
+					$("#replyInsert").val("");  //8.id 가 commentList인 코드를 commenlist jsp 값을 뿌려줌
+			},
+			error: function() {
+				alert("system error!");
+			}
+		});
+	}
+});
+
+function comment_list() {  // 댓글을 페이지전환없이 사용해주기 위해 사용.
 	$.ajax({
 		type: "post",
 		url: "commentlist.retro",
-		data: "bno=${one.bno}",
-		success: function(result) {
-			$("#commentList").html(result);
-		}
+		data: "bno=${one.bno}",  			// 게시글번호를 데이터로 보내주고 있음. 해당게시글을 보여주기 위해 사용.
+		success: function(result) {           //7. commlistaction의 url을 해당경로로 담아줌 
+			$("#commentList").html(result);  //8.id 가 commentList인 코드를 commenlist jsp 값을 뿌려줌
+		}  
 	});
 }
+	
+	$(document).on("click", ".reply_del", function (){
+		
+		var rno = $(this).attr("data_num");
+		var bno = '${one.bno}';
+		
+		
+		$.ajax({
+			url: "replyRemove.retro",
+			type: "POST",
+			data: "rno=" + rno + "&bno=" + bno,  			// 게시글번호를 데이터로 보내주고 있음. 해당게시글을 보여주기 위해 사용.
+			success: function(result) {          		 //7. commlistaction의 url을 해당경로로 담아줌 
+				 comment_list();
+			},
+			error: function() {
+				alert("system Error");
+			}
+		
+		});
+		
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
 <body>
 <%@  include file="../include/header.jsp"%>
+<script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <div id="board_wrap">
 		<div class="box box-primary">
 			<div class="box-header">

@@ -309,7 +309,7 @@
 			</form>
 		</div>
 	</div>
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame({
 		    oAppRef: oEditors,
@@ -317,7 +317,7 @@
 		    sSkinURI: "/fcryan/smarteditor/SmartEditor2Skin.html",
 		    fCreator: "createSEditor2"
 		});
-	</script>
+	</script> -->
 	<%@ include file="../include/footer.jsp"%>
 	
 </body>

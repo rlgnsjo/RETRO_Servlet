@@ -7,7 +7,7 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-
+import com.retro.dto.MemberDTO;
 import com.retro.dto.ReplyDTO;
 import com.retro.mybatis.SqlMapConfig;
 
@@ -49,7 +49,33 @@ public class ReplyDAO {
 		
 	}
 	
+	// 해당게시글 작성
+	public int replyAdd(ReplyDTO rDto) {
+		sqlSession = sqlSessionFactory.openSession(true);  // true 입력시 auto coomit 
+
+
+		try {
+			result = sqlSession.insert("replyAdd", rDto); // result에 replyAdd id에 rDto 값을담는다.
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return result;
+	}
 	
-	
-	
- }	
+	// 해당게시글 삭제 
+	public int replyRemove(int rno) {
+		sqlSession = sqlSessionFactory.openSession(true);  // true 입력시 auto coomit 
+
+		try {
+			result = sqlSession.delete("replyRemove", rno); // result에 replyAdd id에 rDto 값을담는다.
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
+}	

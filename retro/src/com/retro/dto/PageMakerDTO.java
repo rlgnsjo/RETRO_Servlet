@@ -5,10 +5,10 @@ package com.retro.dto;
 public class PageMakerDTO {  // 페이지네이션의 이동처리과정을 위해 만들어준 dto
 	private int totalCount;	// 전체데이터 개수  즉 총 게시글수! 280개임.
 	private int startPage;	// 시작 페이지 번호
-	private int endPage;	// 끝 페이지 번호
+	private int endPage;	// 끝 페이지 번호 1~10번 버튼에 있을경우 마지막페이지 
 	private boolean prev;  // 이전 페이지
 	private boolean next; // 이후 페이지
-	private int displayPageNum = 10;	// 화면에 보여지는 블럭수
+	private int displayPageNum = 10;	// 화면에 보여지는 게시글수
 	private int finalPage;  // 총게시글수를 10분의 1로 나눈값 즉 28임. 
 	private CriteriaDTO criDto;  // 페이지값등 값종 바인딩변수값이 들어가있음.
 	
@@ -25,7 +25,8 @@ public class PageMakerDTO {  // 페이지네이션의 이동처리과정을 위�
 	
 	private void calcData() {     //criDto에는 내가 입력한 변수값 ex)3이 입력되 있고 displayPageNum에는 10이 할당되 있다. 
 		endPage = (int)Math.ceil(criDto.getPage() / (double)displayPageNum) * displayPageNum;
-		//  ex:3가 입력되었을때      (3 / 10) 0.3=> 1* 10 = 10       
+				//(3 / 10) (0.3 Math.ceil과정)=> 1* 10 = 10 
+		//  ex:3가 입력되었을때     Math.ceil 소수점값이 있을때 소수점값에 상관없이 1로 올림해주는 역할.           
 				
 		startPage = (endPage - displayPageNum) + 1;
 		//startPage=1   

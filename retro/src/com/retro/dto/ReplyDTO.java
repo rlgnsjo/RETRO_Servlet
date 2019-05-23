@@ -13,7 +13,18 @@ public class ReplyDTO {
 		  	  	
 	
 	
-  public ReplyDTO(int rno, String content, String writer, Date regdate, int bno) {
+	
+  public ReplyDTO(String content, String writer, int bno) {
+		super();
+		this.content = content;
+		this.writer = writer;
+		this.bno = bno;
+	}
+
+
+
+
+public ReplyDTO(int rno, String content, String writer, Date regdate, int bno) {
 		super();
 		this.rno = rno;
 		this.content = content;

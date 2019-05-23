@@ -7,62 +7,72 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
 </head>
-<body>
+<body>    <!--  9.즉여기의 있는 값이 ajax에서 실행됨  -->
 		<div class="chat"> 
 			<div id="conform">
-			<h4 class="box-title">댓글<span style="color:#f06595"></span></h4>		
-					 <c:forEach items="${replyList}" var="replyview">
-	
+			<c:if test="${replyList.size() == 0}">
+				<div class="reply_list">
+					<div class="reply_line2">
+						등록된 댓글이 없습니다. 첫번째 댓글을 남겨주세요.
+					</div>				
+				</div>
+			
+			</c:if>
+			
+			<h4 class="box-title">댓글 ${replyList.size()} <span style="color:#f06595"></span></h4>	
+					 <c:forEach items="${replyList}" var="replyview">  <!--5. 해당게시글의 목록을 조회하기 위해 사용!  -->						
 						<div class="repl_box">
-							<div class="repl_user">${replyview.writer}</div>
-							<jsp:useBean id="now" class="java.util.Date"/>  <!-- 현재라는 변수가 now라는 id에 담겨있음 -->
-					    	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-					    	 <!-- jstl태그중 날짜값으로 변경해주기 위해 format을 사용!  패턴은 ex 2018 05  18  pattern="yyyy-MM-dd" -->
-					    	<fmt:formatDate value="${replyview.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
-											 
+							<div class="repl_user">${replyview.writer}</div> <!--6.view.jsp에서 ajax로 호출해줬으니 해당 ajax로 이동  -->
 							
-							<div class="repl_date">${replyview.regdate}</div>
+							<c:if test="${sessionScope.loginUser.id == replyview.writer}">
+								<a class="reply_del" data_num="${replyview.rno}">삭제</a>   <!-- data_num : 게시글 삭제시 해당id를 rno변수로 찾아준다. -->
+							</c:if>					 
+							
+							<div class="repl_date"><fmt:formatDate pattern="yyyy-MM-dd" value="${replyview.regdate}"/></div>
 							
 							<div class="repl_text" >${replyview.content}</div> 
 						</div>
 						
 						</c:forEach>
+						<form action="replyAdd.retro" method="POST" name="frm_reply" id="frm_reply">
 						<div class="input_box">
 							<span id="input_header"><span id="input_text">작성자:</span>${replyview.writer}</span>
-							<input type="comment-desc" name="reple" id="input" submit="" placeholder="댓글입력창">
+							<textarea type="comment-desc" name="re_textarea" id="replyInsert" placeholder="댓글입력창"></textarea>
+							
+							<script type="text/javascript">
+							var oEditors = [];
+							nhn.husky.EZCreator.createInIFrame({
+							 oAppRef: oEditors,
+							 elPlaceHolder: "replyInsert",
+							 sSkinURI: "<%= request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
+							 fCreator: "createSEditor2"
+							});
+							</script>
+														
 						</div>																	
 					<div id="user_btn">
-						<button type="button" id="returnGo" class="repl_btn">댓글등록</button>
-						<button type="button" id="returnGo" class="repl_btn">댓글삭제</button>
-					</div>					
+						<button type="button" id="reply_btn" class="repl_btn">댓글등록</button>
+										 
+					<span id="replylist_data">
+						<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${replyview.regdate}"/>
+					</span>
+																	
+					</div>	
+					
+					<c:choose>
+					 <c:when test="${empty sessionScope.loginUser }">
+					 	<div class="reply_login" id="reply_nologin">
+					 		<span class="reply_nologin_span">
+					 		<a class="reply_logina">로그인</a>을 하시면 댓글을 등록하실수 있습니다. </span>					 		 					 	
+					 	</div>					 
+					 </c:when>					
+				</c:choose>
+				<span class="error">내용을 입력해주세요.</span>
+				<input type="hidden" id="re_writer" name="re_writer" value="${sessionScope.loginUser.id }"> <!-- 세션안에 있는 login user에 id값을 담아라. -->
+				<input type="hidden" id="re_bno" name="re_bno">		 										 <!--reply AddAction변수에 담아서 사용.-->
+				</form>							
 			</div>
 		</div>	
 </body>
