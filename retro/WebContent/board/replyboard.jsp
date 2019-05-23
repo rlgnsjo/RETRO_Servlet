@@ -361,6 +361,7 @@
 		#reply_wrap {
 			font-family: 'Nanum Gothic', sans-serif;
 			width: 1000px;
+			height: 100%;
 			box-sizing: border-box;
 			border: 1px solid #FFE3EE;
 			border-radius: 24px;
@@ -415,9 +416,7 @@
 		.repl_box{
 			margin: 16px auto;
 			display: inline-block;
-			border: 1px solid  #FADAE5;		
-			width: 918px;
-			height: 160px;
+			border: 1px solid  #FADAE5;					
 			border-radius: 10px;
 			margin-left: 15px;
 			box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0  #FFE3EE; 
@@ -568,7 +567,7 @@ $(document).on("click", "#reply_btn", function(){
 	}
 });
 
-function comment_list() {  // 댓글을 페이지전환없이 사용해주기 위해 사용.
+function comment_list() {        // 댓글을 페이지전환없이 사용해주기 위해 사용.
 	$.ajax({
 		type: "post",
 		url: "commentlist.retro",

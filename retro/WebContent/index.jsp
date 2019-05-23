@@ -50,20 +50,13 @@
 				<h2>BEST CHANEL LOOK</h2>
 				<p id="gucci">EXO KAI is best guc</p>
 			</div>
-
+	
 		</div>
 		<div class="gallery">
 			<ul>
-				<li><a img="images/채워니.jpg" target="_blank"> <img
-						src="images/채워니.jpg" alt="갤러리 이미지1">
-						<div></div>
-				</a> <a img="images/다니엘시스템.jpg" target="_blank"> <img
-						src="images/다니엘시스템.jpg" alt="갤러리 이미지1">
-				</a> <a img="images/민현꼼데2.jpg" target="_blank"> <img
-						src="images/민현꼼데2.jpg" alt="갤러리 이미지1">
-				</a> <a img="images/발렌시아가.jpg" target="_blank"> <img
-						src="images/발렌시아가.jpg" alt="갤러리 이미지1">
-				</a></li>
+				<c:forEach items="${bestList}" var="best">
+						<a href="#"><img src="images/${best.p_img}" target="_blank "></a>
+					</c:forEach>
 			</ul>
 
 			<div class="desc">
