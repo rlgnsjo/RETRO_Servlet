@@ -17,19 +17,21 @@ public class ViewTableAction implements Action {
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "board/viewtable.jsp";  // 단지 문자열값에 변수선언만 해준것뿐임. 
+		String url = "board/viewtable.jsp";  //3. 이 액션에 해당되는 작업을 거친뒤 forward.setpath(url); 경로로 이동하기 위해
 		
-		CriteriaDTO criDto = new CriteriaDTO(); /*  4.개수값을 구해주는 DTO를  생성. */
+		CriteriaDTO criDto = new CriteriaDTO(); /*  4.개수값을 구해주는 DTO를  생성.  */
+												// 페이지네이션의 값을 구하기 위해	CriteriaDTO생성
 		
-		// (6)
-		int page = 1; /* 게시판 페이지를 누를 경우 페이지네이션 디폴트값은 반드시 1임! 게시판 들어가면 무조건 1페이지부터 시작한다는말.*/
+		
+		int page = 1; /* (5)게시판 페이지를 누를 경우 페이지네이션 디폴트값은 반드시 1임! 게시판 들어가면 무조건 1페이지부터 시작한다는말.*/
 		// 페이지 번호 설정 request.getParameter("page") 
 		if (request.getParameter("page") != null) { /* 페이지네이션의 하단버튼중 1~10중 버튼을 선택해서 해당값이 들어가 조건문을탐! */
+													/* view딴에서 입력받은정보 값이 담아있다! */
 			page = Integer.parseInt(request.getParameter("page"));  /* 문자열로 들어온 값을 숫자값으로 바꿔주는 함수다. 그 값을 페이지에 담아줬음
 																	즉 page에 문자열 값으로 5가 들어가면 숫자값 5로 변경해주는 함수다.ㅣ */	
 		}			
 		System.out.println("페이지번호:" + page);
-		criDto.setPage(page);   // 7. CriteriaDTO criDto setpage함수실행
+		criDto.setPage(page);   // 6. 페이지에서 입력받은 정보를 criDto.setPage(page)에 담아주고 있다.
 		
 		
 		// 페이지 정렬 설정

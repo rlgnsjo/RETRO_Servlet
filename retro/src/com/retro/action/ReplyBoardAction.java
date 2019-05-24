@@ -28,8 +28,7 @@ public class ReplyBoardAction implements Action {
 		
 		BoardDTO bDto = bDao.view(bno);
 		request.setAttribute("one", bDto);
-		
-		
+				
 		
 		ActionForward  forward = new ActionForward(); 
 		forward.setpath(url);  

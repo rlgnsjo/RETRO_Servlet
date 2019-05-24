@@ -28,7 +28,7 @@ public class CriteriaDTO { 		    // 기준 DTO! 한페지에 있는 게시글의
 		return page;
 	}
 
-	public void setPage(int page) {  // (8) viewtable 액션에 할당된 값을 할당! 호출한곳이 viewtableaction으로 다시 돌아감.
+	public void setPage(int page) {  // 7.페이지 정보를 값의 입력받은 정보가 담겨있다.
 		if(page <= 0) {
 			this.page = 1;
 			return;

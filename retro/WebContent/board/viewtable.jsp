@@ -277,7 +277,7 @@
 	<table class="retrotable">
 	    <thead>
 		    <tr>    	
-		        <th id="top_title">no.</i></th>
+		        <th id="top_title">no.</i></th>  <!--상단부분 테이블!  -->
 		        <th>제목</th>
 		        <th>작성자</th>
 		        <th>조회수</th>
