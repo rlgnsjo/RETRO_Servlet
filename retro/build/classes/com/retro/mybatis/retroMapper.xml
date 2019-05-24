@@ -16,7 +16,7 @@
      <![CDATA[
      	SELECT *
 		FROM (SELECT * FROM tbl_product 
-        ORDER BY p_indate DESC)
+        ORDER BY p_indate ASC)
  	    WHERE rownum <= 4
  	  ]]>   
      </select>
@@ -134,6 +134,19 @@
 			SET viewcnt = viewcnt +1
 		WHERE bno = #{bno}	
 	</update>
+	<!-- 댓글 조회수 증가  -->
+	<update id="replyCntUpdate" >
+		Update tbl_board
+		<if test="flag == 'plus'">
+			SET replycnt = reply +1
+		</if>	
+		<if test="flag == 'minus'">
+			SET replycnt = reply -1
+		</if>
+		WHERE bno = #{bno}				
+	</update>
+	
+	
 	
 	<select id="replyList" parameterType="String" resultType="com.retro.dto.ReplyDTO">
 		SELECT * FROM tbl_reply
@@ -151,6 +164,13 @@
 		 DELETE FROM tbl_reply
 		 WHERE rno = #{rno}	
 	</delete>
+	
+
+	<insert id="registerAdd" parameterType="com.retro.dto.BoardDTO">
+		 INSERT INTO tbl_board(bno,title,content,writer)
+ 		 VALUES (SEQ_BOARD.nextval,#{title},#{content},#{writer})	
+	</insert>	
+	
 	
 
 </mapper>

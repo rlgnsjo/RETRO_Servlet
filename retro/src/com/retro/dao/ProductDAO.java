@@ -51,7 +51,8 @@ public class ProductDAO {
 		sqlSession = sqlSessionFactory.openSession();
 		
 		try {
-			list = sqlSession.selectList("newList");						
+			list = sqlSession.selectList("newList");	
+			System.out.println("새로운사진 정렬:" + list.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -46,8 +46,8 @@
 		</div>
 		<div class="gallery">
 			<ul>
-				<c:forEach items="${newList}" var="best">
-						<a href="#"><img src="images/${best.p_img}" target="_blank "></a>
+				<c:forEach items="${newList}" var="sin">
+						<a href="#"><img src="images/${sin.p_img}" target="_blank "></a>
 					</c:forEach>
 			</ul>
 

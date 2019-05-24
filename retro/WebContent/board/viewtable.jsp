@@ -421,6 +421,23 @@
 	function bno_val(bno) {
 		location.href= "${path}/replyboard.retro?bno=" + bno;
 	}
+	
+	$("#boardAdd").on("click", function(){
+		$.ajax({
+			type: "post",
+			dataType: "json",
+			url: "registerAjax.retro", 			
+			success: function(data) {           
+				if(data.message == "login") {
+					location.href= "registerView.retro"
+				} else {
+					location.href= "loginPage.jsp"
+				}
+			}  
+		});
+	})
+	
+	
 		
 	</script>
 

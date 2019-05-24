@@ -1,5 +1,6 @@
 package com.retro.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -117,6 +118,36 @@ public class BoardDAO {
 			sqlSession.close();
 		}		
 	}
-	
+		// 댓글 등록 또는 삭제시 해당게시글 replycnt +1 -1 
+		public void replyCntUpdate(String bno, String flag) {
+			sqlSession = sqlSessionFactory.openSession(true);
+			
+			try {
+			HashMap<String, String>	map = new HashMap<>();
+			map.put("bno", bno);
+			map.put("flag", flag);
+			 sqlSession.update("replyCntUpdate",map);  //1건의 결과값이 담겨있음 boardviewaction에
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
+		}
+			
+		public void registerAdd(BoardDTO bDto) {
+			
+			sqlSession = sqlSessionFactory.openSession(true);
+			
+			try {
+			sqlSession.insert("registerAdd", bDto);  //1건의 결과값이 담겨있음 boardviewaction에
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}		
+		}	
+		
+
 		
 }	

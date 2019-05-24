@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@  include file="../include/header.jsp"%>
+<c:if test="${sessionScope.loginUser == null}">
+		<script>
+	alert("로그인 하신후 사용하세요.");
+	 location.href='${path}/loginPage.retro';
+</script>
+</c:if>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -199,23 +210,26 @@
 		cursor: pointer;
 		font-size: 15px;
 	}
-	#close_btn {
+	#close_file_btn {
 		line-height: 29px;
 		cursor: pointer;
 		font-size: 15px;
 	}
-	#close_btn:hover {
+	#close_file_btn:hover {
 		font-size: 25px;
-	}
+	}	
 </style>
-<script type="text/javascript" src="/fcryan/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+</head>
+
+<script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
-	$(document).on("click", ".btn-primary", function(elClickedObj){
+	$(document).on("click", ".btn-primary", function(){
 		var title = $("#title").val();
 		// 스마트에디터로 content부분 값 넘겨받는 부분
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		var content = $("#content").val();
 		
-		if(title == "") {
+		if(content == "<p><br></p>") {
 			$("#title").focus();
 			$(".error").css("display", "block");
 			return false;
@@ -238,24 +252,25 @@
 	});
 	
 	$(document).on("change", "#uploadfile", function(){
-		var filesize = $(this)[0].files;
-		if(filesize.length < 1) {
-			$("#file-name").text("선택된 파일 없음");
-			$("#close_btn").css("display", "none");
+		var filesize = $(this)[0].files; // 첫번째 번지수에 있는 파일을 가져와라
+		if(filesize.length < 1) {  // 파일사이즈의 배열값에 1번보다 적다는것은 값이 없다는의미
+			$("#file-name").text("선택된 파일 없음");  //값이 없으니 선택된파일이 없다라고 text명을 변경해준다.
+			$("#close_file_btn").css("display", "none");
 		} else {
-			var filename = this.files[0].name;
-			var size = this.files[0].size;
-			var maxSize  = 10 * 1024 * 1024;
+			var filename = this.files[0].name; 
+			var size = this.files[0].size; // 사이즈는 byte단위로 가져옴
+			var maxSize  = 10 * 1024 * 1024; // 최대사이즈는 10M!
 			
-	        if(size > maxSize)
-	        {
+	        if(size > maxSize) {     
 	            alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
 	            $("#file-name").text("선택된 파일 없음");
 	            $("#uploadfile").val("");
-	            $("#now-file-size").val(0);
+	            $("#now-file-size").text("0mb");
 	        } else {
 	        	$("#file-name").text(filename);
-				$("#close_btn").css("display", "block");	
+	        	var formSize = size/(1024*1024);
+	        	 $("#now-file-size").text(formSize.toFixed(2)+"mb");
+				$("#close_file_btn").css("display", "block");	
 	        }
 
 		}
@@ -263,16 +278,16 @@
 	
 
 	
-	$(document).on("click", "#close_btn", function(){
+	$(document).on("click", "#close_file_btn", function(){
 		$("#uploadfile").replaceWith($("#uploadfile").clone(true));
 		$("#uploadfile").val("");
+		$("#now-file-size").text("");
 		$("#file-name").text("선택된 파일 없음");
-		$("#close_btn").css("display", "none");
+		$("#close_file_btn").css("display", "none");
 	});
 	
 </script>
-</head>
-<%@  include file="../include/header.jsp"%>
+<script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <body>
 <div id="board_wrap">
 		<div class="box box-primary">
@@ -280,7 +295,7 @@
 				<h3 class="box-title">게시글 등록</h3>
 			</div>
 			<!-- form속성에 action을 지정하지 않으면 현재 경로를 그대로 action의 대상 경로로 설정 -->
-			<form role="form" id="frm_bin" name="frm_bin" action="boardInsertPlay.bizpoll" method="post" enctype="multipart/form-data">
+			<form id="frm_bin" name="frm_bin" action="registerPlay.retro" method="post">
 
 			<div class="box-body">
 				<div class="form-group">
@@ -291,7 +306,15 @@
 				<div class="form-group" style="width: 750px;">
 					<label for="content">내용</label>
 					<textarea class="form-control" id="content" name="content" rows="10" cols="100"></textarea>
-					
+					<script type="text/javascript">
+						var oEditors = [];
+						nhn.husky.EZCreator.createInIFrame({
+						 oAppRef: oEditors,
+						 elPlaceHolder: "content",
+						 sSkinURI: "<%= request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
+						 fCreator: "createSEditor2"
+						});
+					</script>
 				</div>
 				<div class="forn-group">
 					<label for="writer">작성자</label> <input type="text" id="writer" name="writer" class="form-control" value="user01" readonly="readonly">
@@ -300,7 +323,8 @@
 					<input type="file" name="uploadfile" id="uploadfile" style="display: none;">
 					<input type="button" class="btn btn-file" value="파일 선택"> 
 					<span class="files" id="file-name" style="height: 29px; border: none;" >선택된 파일 없음</span> 
-					<i class="fa fa-close" id="close_btn" style="display: none"></i>
+					<span id="now-file-size" ></span>
+					<i class="fas fa-times" id="close_file_btn" style="display: none"></i>
 				</div>
 			</div>
 			<div>
@@ -309,16 +333,7 @@
 			</form>
 		</div>
 	</div>
-	<script type="text/javascript">
-		var oEditors = [];
-		nhn.husky.EZCreator.createInIFrame({
-		    oAppRef: oEditors,
-		    elPlaceHolder: "content",
-		    sSkinURI: "/retro/smarteditor/SmartEditor2Skin.html",
-		    fCreator: "createSEditor2"
-		});
-	</script>
-	<%@ include file="../include/footer.jsp"%>
 	
+	<%@ include file="../include/footer.jsp"%>	
 </body>
 </html>

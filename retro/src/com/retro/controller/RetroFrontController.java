@@ -26,6 +26,9 @@ import com.retro.action.MemberPlayAction;
 import com.retro.action.PwCheckAction;
 import com.retro.action.PwUpdateAction;
 import com.retro.action.PwUpdatePlayAction;
+import com.retro.action.RegisterAjaxAction;
+import com.retro.action.RegisterPlayAction;
+import com.retro.action.RegisterViewAction;
 import com.retro.action.ReplyAddAction;
 import com.retro.action.ReplyBoardAction;
 import com.retro.action.ReplyRemoveAction;
@@ -132,7 +135,16 @@ public class RetroFrontController extends HttpServlet {
 		} else if (command.equals("/replyRemove.retro")) {
 			action = new ReplyRemoveAction(); // 1. 객체 생성 .
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
-		} 
+		} else if (command.equals("/registerAjax.retro")) {
+			action = new RegisterAjaxAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		} else if (command.equals("/registerView.retro")) {
+			action = new RegisterViewAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		}	else if (command.equals("/registerPlay.retro")) {
+			action = new RegisterPlayAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		}
 		
 			
 		

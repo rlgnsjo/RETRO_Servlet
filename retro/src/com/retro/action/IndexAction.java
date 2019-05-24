@@ -30,6 +30,12 @@ public class IndexAction implements Action{
 		}
 		
 		
+	
+		List<ProductDTO> nList= pDao.newList();
+		
+		request.setAttribute("newList", nList);
+		
+		
 		ActionForward  forward = new ActionForward(); 
 		forward.setpath(url);  // 경로를 찾아감. 액션포워드의 setpath 메서드를 탐. 
 		forward.setRedirect(false);  //forward 방식으로 보냄
