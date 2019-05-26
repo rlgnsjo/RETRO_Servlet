@@ -64,6 +64,7 @@ public class ReplyDAO {
 		return result;
 	}
 	
+	
 	// 해당게시글 삭제 
 	public int replyRemove(int rno) {  // 9 rno 값을 받아주고 sqlSession사용 위해 사용! 
 		sqlSession = sqlSessionFactory.openSession(true);  // true 입력시 auto coomit 

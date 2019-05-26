@@ -35,6 +35,25 @@ public class IndexAction implements Action{
 		
 		request.setAttribute("newList", nList);
 		
+		for (ProductDTO productDTO : nList) {
+			System.out.println(productDTO.getP_img());
+			System.out.println(productDTO.getP_name());
+			System.out.println(productDTO.getP_price());
+		}
+		
+		// 조회수가 높은순 즉 p_cnt의 값을 이용해서 정렬해 주었음
+		
+		List<ProductDTO> vList= pDao.viewList();
+		
+		request.setAttribute("viewList", vList);
+		
+		for (ProductDTO productDTO : nList) {
+			System.out.println(productDTO.getP_img());
+			System.out.println(productDTO.getP_name());
+			System.out.println(productDTO.getP_price());
+		}
+		
+		
 		
 		ActionForward  forward = new ActionForward(); 
 		forward.setpath(url);  // 경로를 찾아감. 액션포워드의 setpath 메서드를 탐. 

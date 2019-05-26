@@ -31,6 +31,7 @@
 							</c:if>					 
 							
 							<div class="repl_date"><fmt:formatDate pattern="yyyy-MM-dd" value="${replyview.regdate}"/></div>
+			
 							
 							<div class="repl_text" >${replyview.content}</div> 
 						</div>
@@ -62,7 +63,9 @@
 					</div>	
 					
 					<c:choose>
-					 <c:when test="${empty sessionScope.loginUser }">
+					 <c:when test="${empty sessionScope.loginUser }"> <!--   c:when test안에 값은 jstl 태그의 조건식값. sessionScope에 접근해서
+					  loginuser가 비어 있으면 밑에 있는 코드가 실행된다는걸 의미 하는거 같음 .-->
+					 
 					 	<div class="reply_login" id="reply_nologin">
 					 		<span class="reply_nologin_span">
 					 		<a class="reply_logina">로그인</a>을 하시면 댓글을 등록하실수 있습니다. </span>					 		 					 	
@@ -71,7 +74,8 @@
 				</c:choose>
 				<span class="error">내용을 입력해주세요.</span>
 				<input type="hidden" id="re_writer" name="re_writer" value="${sessionScope.loginUser.id }"> <!-- 세션안에 있는 login user에 id값을 담아라. -->
-				<input type="hidden" id="re_bno" name="re_bno">		 										 <!--reply AddAction변수에 담아서 사용.-->
+				<input type="hidden" id="re_bno" name="re_bno">		<!--reply AddAction변수에 담아서 사용.-->
+				 										 
 				</form>							
 			</div>
 		</div>	

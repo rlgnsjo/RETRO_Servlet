@@ -32,20 +32,6 @@
 
 		<div class="gallery">
 			<ul>
-			<c:forEach items="${bestList}" var="best">
-						<a href="#"><img src="images/${best.p_img}" target="_blank "></a>
-					</c:forEach>
-			
-			</ul>
-
-			<div class="desc">
-				<h2>BEST CHANEL LOOK</h2>
-				<p id="gucci">EXO KAI is best guc</p>
-			</div>
-	
-		</div>
-		<div class="gallery">
-			<ul>
 				<c:forEach items="${newList}" var="sin">
 						<a href="#"><img src="images/${sin.p_img}" target="_blank "></a>
 					</c:forEach>
@@ -56,6 +42,21 @@
 				<p id="gucci">EXO KAI is best gucci dreessr</p>
 
 			</div>
+		</div>
+		
+		<div class="gallery">
+			<ul>
+			<c:forEach items="${viewList}" var="cnt">
+						<a href="#"><img src="images/${cnt.p_img}" target="_blank "></a>
+					</c:forEach>
+			
+			</ul>
+
+			<div class="desc">
+				<h2>BEST CHANEL LOOK</h2>
+				<p id="gucci">EXO KAI is best guc</p>
+			</div>
+	
 		</div>
 
 

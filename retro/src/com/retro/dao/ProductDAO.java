@@ -46,6 +46,8 @@ public class ProductDAO {
 		return list;
 	}
 	
+	
+	// 최신 날짜순으로 정렬
 	public List<ProductDTO> newList() {
 		List<ProductDTO> list = null;
 		sqlSession = sqlSessionFactory.openSession();
@@ -60,4 +62,25 @@ public class ProductDAO {
 		}		
 		return list;
 	}
+	
+	// 조회수가 높은순으로 정렬 
+	public List<ProductDTO> viewList() {
+		List<ProductDTO> list = null;
+		sqlSession = sqlSessionFactory.openSession();
+		
+		try {
+			list = sqlSession.selectList("viewList");	
+			System.out.println("조회수 높은순 정렬:" + list.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}		
+		return list;
+	}
+	
+	
+	
+	
+	
 }

@@ -16,10 +16,21 @@
      <![CDATA[
      	SELECT *
 		FROM (SELECT * FROM tbl_product 
-        ORDER BY p_indate ASC)
+        ORDER BY p_indate DESC)
  	    WHERE rownum <= 4
  	  ]]>   
      </select>
+     <select id="viewList" resultType="com.retro.dto.ProductDTO">
+     <![CDATA[
+     	SELECT *
+		FROM (SELECT * FROM tbl_product 
+        ORDER BY p_cnt DESC)
+ 	    WHERE rownum <= 4
+ 	  ]]>   
+     </select>
+     
+     
+     
      <!--21. 매개변수로 전달받은 id값을 sql문에 바인딩변수로 넣고 sql문 실행 (DB로 이동) -->
       <select id="idCheck" parameterType="String" resultType="String">    
      	SELECT id FROM tbl_member

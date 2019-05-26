@@ -539,14 +539,14 @@ $(document).on("click", "#reply_btn", function(){
 	oEditors.getById["replyInsert"].
 	exec("UPDATE_CONTENTS_FIELD", []);
 	
-	var content = $("#replyInsert").val();
+	var content = $("#replyInsert").val(); //val()은 양식(form)의 값을 가져오거나 값을 설정하는 메소드  현재 content의안에는  id= replyInsert 값이 담겨있음.
 
 	if (content == "<p><br></p>") {
 		return false;
 	} else {
 		// 게시글 번호 담아서 보냄.
 		var bno = '${one.bno}';
-		$('#re_bno').val(bno);
+		$('#re_bno').val(bno);  // input id re_bno에 게시글번호 값이 담기게 할려는거 같다.
 		
 		$.ajax({
 			type: "post",
