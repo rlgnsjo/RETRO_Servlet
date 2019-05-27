@@ -29,7 +29,7 @@ public class IndexAction implements Action{
 			System.out.println(productDTO.getP_price());
 		}
 		
-		
+		// p_indate (날짜순으로 정렬 해주었음)
 	
 		List<ProductDTO> nList= pDao.newList();
 		

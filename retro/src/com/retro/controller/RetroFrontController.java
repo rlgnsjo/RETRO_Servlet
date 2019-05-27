@@ -13,6 +13,7 @@ import com.retro.action.Action;
 import com.retro.action.ActionForward;
 import com.retro.action.CommentListAction;
 import com.retro.action.ConstractAction;
+import com.retro.action.DownloadAction;
 import com.retro.action.DropMemberAction;
 import com.retro.action.DropMemberPlayAction;
 import com.retro.action.IdCheckAction;
@@ -29,6 +30,7 @@ import com.retro.action.PwUpdatePlayAction;
 import com.retro.action.RegisterAjaxAction;
 import com.retro.action.RegisterPlayAction;
 import com.retro.action.RegisterViewAction;
+import com.retro.action.RemovePlayAction;
 import com.retro.action.ReplyAddAction;
 import com.retro.action.ReplyBoardAction;
 import com.retro.action.ReplyRemoveAction;
@@ -141,10 +143,17 @@ public class RetroFrontController extends HttpServlet {
 		} else if (command.equals("/registerView.retro")) {
 			action = new RegisterViewAction(); // 1. 객체 생성 .
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
-		}	else if (command.equals("/registerPlay.retro")) {
+		} else if (command.equals("/registerPlay.retro")) {
 			action = new RegisterPlayAction(); // 1. 객체 생성 .
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		} else if (command.equals("/download.retro")) {
+			action = new DownloadAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		} else if (command.equals("/removePlay.retro")) {
+			action = new RemovePlayAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
 		}
+		
 		
 			
 		

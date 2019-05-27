@@ -16,7 +16,7 @@
      <![CDATA[
      	SELECT *
 		FROM (SELECT * FROM tbl_product 
-        ORDER BY p_indate DESC)
+        ORDER BY p_indate asc)
  	    WHERE rownum <= 4
  	  ]]>   
      </select>
@@ -178,9 +178,13 @@
 	
 
 	<insert id="registerAdd" parameterType="com.retro.dto.BoardDTO">
-		 INSERT INTO tbl_board(bno,title,content,writer)
- 		 VALUES (SEQ_BOARD.nextval,#{title},#{content},#{writer})	
+		 INSERT INTO tbl_board(bno,title,content,writer, filename, filesize)
+ 		 VALUES (SEQ_BOARD.nextval,#{title},#{content},#{writer},#{filename},#{filesize})	
 	</insert>	
+	<delete id="removeBoard" parameterType="String">
+		 DELETE FROM tbl_board
+		 WHERE bno = #{bno}	
+	</delete>
 	
 	
 

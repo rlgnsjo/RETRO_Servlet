@@ -600,7 +600,18 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 		
 	});
 	
-
+	$(document).on("click", "#remove_btn", function(){
+		location.href="removePlay.retro?bno=${one.bno}&filename=${one.filename}";
+			
+	});
+	
+	$(document).on("click", "#update_btn", function(){
+		location.href="removePlay.retro?bno=${one.bno}&filename=${one.filename}";
+			
+	});
+	
+	
+	
 
 
 
@@ -654,7 +665,11 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 					<tr>
 						<th style="border-left: 0px">첨부파일</th>
 						<td colspan="2" style="border-right:0px">
-							
+						<c:if test="${one.filesize > 0}">
+						 <a href="download.retro?file=${one.filename}">${one.filename}</a>
+						(<fmt:formatNumber type="number" pattern="0.00" value="${one.filesize /1024 /1024}">
+						</fmt:formatNumber>mb)	
+						</c:if>
 						</td>
 						<td style="border-left: 0px; border-right: 0px; text-align: center;">
 							<i class="fa fa-eye" style="color: #f06595;"></i> ${one.viewcnt}  
@@ -673,7 +688,8 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 
 				<div id="user_btn">
 					<button type="button" id="returnGo" class="reply_btn">게시판 목록</button>
-					<button id="answer_btn" class="reply_btn">답변</button>
+					<button class="reply_btn" id="remove_btn">삭제</button>
+					<button class="reply_btn" id="update_btn">수정</button>
 					
 				<c:if test="$sessionScope.loginUser.id == one ">	
 					<button id="update_btn" class="reply_btn">수정</button>					
@@ -696,7 +712,7 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 		</div>	
 
 .
-	 <div id="modal_all">     
+	<!--  <div id="delete_modal_all">     
          <div id="content_layout">
              <div id="modal_header">게시글 삭제 <span id="close_btn"><i class="fa fa-close"></i></span></div>
              <div id="modal_content">정말 <span class="point">게시글</span>을 삭제하시겠습니까?</div>
@@ -706,7 +722,7 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
                 <a id="yes_btn" href="#">네</a>
             </div>
          </div>
-    </div> 
+    </div>  -->
 				
 		
 			

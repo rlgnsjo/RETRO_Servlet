@@ -302,8 +302,7 @@
 		        <c:if test="${today == regdate}">
 		        <span class="new_time">New</span>
 		        </c:if>
-		        </td>
-		        
+		        </td>		        
 		          <td>${bDto.writer}</td>		     
 		        <td>${bDto.viewcnt}</td>
 		        <td>${bDto.goodcnt}<i class="fas fa-heart"></i></td>
@@ -317,7 +316,16 @@
 		      	 	</c:otherwise>		      	 
 		      	 </c:choose>	 		
 		       </td>
-		        <td>${bDto.filename} <i class="far fa-file-alt"></i></td>	        
+		       <c:choose>
+			       <c:when test="${bDto.filesize > 0}">
+			       		<td><i class="far fa-file-alt"></i></td>	
+			       </c:when>   
+			       <c:otherwise>
+			        	<td></td>
+			       </c:otherwise>
+		       </c:choose>
+		       
+		             
 		    </tr>
 	    </c:forEach>
 	    <tbody>

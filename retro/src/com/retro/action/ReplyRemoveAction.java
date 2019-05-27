@@ -18,7 +18,7 @@ public class ReplyRemoveAction implements Action{
 		int rno =Integer.parseInt(request.getParameter("rno"));
 		int bno =Integer.parseInt(request.getParameter("bno"));
 		
-		System.out.println("댓글 삭제 반환유뮤 확인" + rno +bno);
+		System.out.println("댓글 삭제 반환유무 확인" + rno +bno);
 	
 		ReplyDAO rDao = ReplyDAO.getInstance();
 		int result = rDao.replyRemove(rno);

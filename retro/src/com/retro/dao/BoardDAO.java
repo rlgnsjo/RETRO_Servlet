@@ -147,6 +147,19 @@ public class BoardDAO {
 				sqlSession.close();
 			}		
 		}	
+		// 게시글 삭제
+		public void removeBoard(String bno) {
+			
+			sqlSession = sqlSessionFactory.openSession(true);
+			
+			try {
+			sqlSession.delete("removeBoard", bno);  
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}		
+		}	
 		
 
 		

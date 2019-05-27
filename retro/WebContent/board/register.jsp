@@ -295,7 +295,7 @@
 				<h3 class="box-title">게시글 등록</h3>
 			</div>
 			<!-- form속성에 action을 지정하지 않으면 현재 경로를 그대로 action의 대상 경로로 설정 -->
-			<form id="frm_bin" name="frm_bin" action="registerPlay.retro" method="post">
+			<form id="frm_bin" name="frm_bin" action="registerPlay.retro" method="post" enctype="multipart/form-data">
 
 			<div class="box-body">
 				<div class="form-group">
@@ -324,6 +324,8 @@
 					<input type="button" class="btn btn-file" value="파일 선택"> 
 					<span class="files" id="file-name" style="height: 29px; border: none;" >선택된 파일 없음</span> 
 					<span id="now-file-size" ></span>
+					
+					
 					<i class="fas fa-times" id="close_file_btn" style="display: none"></i>
 				</div>
 			</div>
