@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.retro.action.Action;
 import com.retro.action.ActionForward;
+import com.retro.action.BoardUpdateAction;
 import com.retro.action.CommentListAction;
 import com.retro.action.ConstractAction;
 import com.retro.action.DownloadAction;
@@ -152,7 +153,11 @@ public class RetroFrontController extends HttpServlet {
 		} else if (command.equals("/removePlay.retro")) {
 			action = new RemovePlayAction(); // 1. 객체 생성 .
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		} else if (command.equals("/boardUpdate.retro")) {
+			action = new BoardUpdateAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
 		}
+		
 		
 		
 			

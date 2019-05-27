@@ -606,7 +606,7 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 	});
 	
 	$(document).on("click", "#update_btn", function(){
-		location.href="removePlay.retro?bno=${one.bno}&filename=${one.filename}";
+		location.href="boardUpdate.retro?bno=${one.bno}";
 			
 	});
 	
