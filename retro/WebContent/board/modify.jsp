@@ -222,6 +222,51 @@
 		color: tomato;
 		margin-left: 8px;
 	}
+	 .modal{
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+          
+        .modal-content {
+            background-color: #fefefe;           
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #FFD8D8;
+            border-radius: 35px;
+            width: 30%;                           
+      }
+      .modal-content p {
+      	text-align: center;
+      	line-height: 1.5;
+      	font-size: 14pt;
+
+      }
+      .modal-content span {
+		    font-size: 24pt;
+      }
+      #modal_btn{     	      	
+      	text-align: center;
+      	padding-bottom: 10px;
+      	padding-top: 10px;
+      }
+      .btn_type{
+      width: 150px;	
+      height: 50px;
+	  background-color: #FFD8D8;			
+	  border:0px;
+	  color: white;
+	  border-radius: 8px;
+	  margin: 11px;
+	  cursor:pointer;
+	 }
 	
 	
 </style>
@@ -295,8 +340,19 @@
 	$(document).on("click", ".close_basic_btn", function(){
 		$('.file_msg').css('display', 'block');
 		$('.basic_files').css('color', '#AAA');
-						.css('text-decoration', 'line-through');		
+						 .css('text-decoration', 'line-through');		
 	}
+	
+	$(document).on("click", "#btn-primary", function(){
+			alert("system error");
+	});
+	
+	
+	
+	
+	
+	
+	
 	
 </script>
 <script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
@@ -304,20 +360,21 @@
 <div id="board_wrap">
 		<div class="box box-primary">
 			<div class="box-header">
-				<h3 class="box-title">게시글 등록</h3>
+				<h3 class="box-title">게시글 수정</h3>
 			</div>
 			<!-- form속성에 action을 지정하지 않으면 현재 경로를 그대로 action의 대상 경로로 설정 -->
-			<form id="frm_bin" name="frm_bin" action="registerPlay.retro" method="post" enctype="multipart/form-data">
+			<!-- form태그 안의 값은 input, textarea, select, check, 값만 가져올수있음.  -->
+			<form id="frm_bin" name="frm_bin" action="modifyPlay.retro" method="post" enctype="multipart/form-data">
 
 			<div class="box-body">
 				<div class="form-group">
-					<label for="title">제목</label> 
-					<input type="text" id="title" name="title" class="form-control">
+					<label for="title">제목</label>					
+					<input type="text" value="${one.title}" id="title" name="title" class="form-control" >
 					<span class="error">제목을 입력해 주세요.</span>
 				</div>
 				<div class="form-group" style="width: 750px;">
-					<label for="content">내용</label>
-					<textarea class="form-control" id="content" name="content" rows="10" cols="100"></textarea>
+					<label for="content"></label>
+					<textarea class="form-control" id="content" name="content" rows="10" cols="100"><p>${one.content}</p></textarea>
 					<script type="text/javascript">
 						var oEditors = [];
 						nhn.husky.EZCreator.createInIFrame({
@@ -329,13 +386,16 @@
 					</script>
 				</div>
 				<div class="forn-group">
-					<label for="writer">작성자</label> <input type="text" id="writer" name="writer" class="form-control" value="user01" readonly="readonly">
+					<label for="writer">작성자</label><input value="${one.writer}" type="text" id="writer" name="writer" class="form-control"  readonly="readonly">
+					
 				</div>
 				<div id="file_wrap">
 					<input type="file" name="uploadfile" id="uploadfile" style="display: none;">
-					<input type="button" class="btn btn-file" value="파일 선택"> 
+					<input type="button" class="btn btn-file" value="파일 선택"> 											
 					<span class="basic_files" id="file-name" style="height: 29px; border: none;" >선택된 파일 없음</span> 
-					<span class="file_msg">[첨부파일 삭제됨.]</span>
+					<span class="file_msg">[첨부파일 삭제됨.]</span> 
+					<i class="fas fa-check open_file_btn"></i>
+					<i class="fas fa-time close_file_btn close_basic_btn"></i>
 					<span id="now-file-size" ></span>
 					
 					
@@ -343,11 +403,27 @@
 				</div>
 			</div>
 			<div>
-				<button class="btn btn-primary">게시글 수정</button>
-			</div>
+				<button class="btn btn-primary" id="btn-primary">게시글 수정</button>
+			</div>				
+			
 			</form>
 		</div>
 	</div>
+	
+		<<!-- div id="modal_all">     
+         <div id="content_layout">
+             <div id="modal_header">게시글 삭제 <span id="close_btn"><i class="fa fa-close"></i></span></div>
+             <div id="modal_content">정말 <span class="point">게시글</span>을 삭제하시겠습니까?</div>
+            
+            <div class="btn_login">
+                <a id="no_btn" href="#">아니오</a>
+                <a id="yes_btn" href="#">네</a>
+            </div>
+         </div>
+    </div>  -->
+	
+	
+	
 	
 	<%@ include file="../include/footer.jsp"%>	
 </body>

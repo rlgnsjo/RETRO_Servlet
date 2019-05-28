@@ -159,6 +159,20 @@ public class BoardDAO {
 			} finally {
 				sqlSession.close();
 			}		
+		}
+
+		// 게시글 수정! 
+		public void modify(BoardDTO bDto) {		
+			sqlSession =sqlSessionFactory.openSession(true);
+			
+			try {
+			int result= sqlSession.update("modifyBoard",bDto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				sqlSession.close();
+			}
+			
 		}	
 		
 

@@ -523,13 +523,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 	
 <script type="text/javascript">
 
+	history.pushState(null, document.title, location.href);
+	window.addEventListener('popstate', function(event) {
+		history.pushState(null, document.title, '<%=referer%>');
+		location.reload();
+	});
+
+
 $(document).on("click", "#returnGo", function(){
 	location.href = "<%=referer%>";
 });
 
 $(document).ready(function(){
-	
-	/* 문서가 준비되면 댓글 목록을 조회하는 Ajax실행  */
+	/* 문서가 준비되면 댓글 목록을 조회하는 Ajax실행  ==  */
 	comment_list();
 });
 
@@ -659,7 +665,7 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 					      	 	</c:otherwise>		      	 
 					      	 </c:choose>
 						</td>
-						<th >${one.writer}<i class="fas fa-pencil-alt"></i></th>
+						<th >작성자<i class="fas fa-pencil-alt"></i></th>
 						<td style="width: 30%; border-right: 0px;">${one.writer}</td>
 					</tr>
 					<tr>
@@ -688,13 +694,12 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 
 				<div id="user_btn">
 					<button type="button" id="returnGo" class="reply_btn">게시판 목록</button>
+				<c:if test="${sessionScope.loginUser.id == one.writer}"> 
 					<button class="reply_btn" id="remove_btn">삭제</button>
 					<button class="reply_btn" id="update_btn">수정</button>
+			  </c:if> 
 					
-				<c:if test="$sessionScope.loginUser.id == one ">	
-					<button id="update_btn" class="reply_btn">수정</button>					
-					<button id="delete_btn" class="reply_btn">삭제</button>
-		    </c:if>
+		 
 				</div>
 
 				<div id="wrap_like">

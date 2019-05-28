@@ -8,22 +8,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.MultipartStream;
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.retro.common.Constants;
 import com.retro.dao.BoardDAO;
 import com.retro.dto.BoardDTO;
 
-
-public class RegisterPlayAction implements Action {
+public class ModifyPlayAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String url = "viewtable.retro";
+		
 		// 파일업로드 처리 시작!1. 파일을 저장할 디렉토리 생성
 		File uploadDir = new File(Constants.UPLOAD_PATH); // D드라이브의 업로드 파일을 가져다줌. 
 		
@@ -42,6 +39,9 @@ public class RegisterPlayAction implements Action {
 		// 그래서 파일뿐만 아니라 기존에 string 타입도 전부 Multipart 타입으로 변경해야함.
 		
 		// 파일업로드 2) UPLOAD_PATH 경로로 파일지정. 
+		//기존파일이 있든 없든 새로운파일을 저장
+		// ex) 만약에 기존파일이 aaa.txt가 있고 새로등록하는 첨부파일이 bbb.txt가 있다면
+		// 현재 upload 디렉토리에는 aaa.txt와 bbb.txt가 있음.
 		MultipartRequest multi = new MultipartRequest(request,  // 기존에 받은값을 Multipart로 받아준다.
 				Constants.UPLOAD_PATH,  // 파일업로드 경로 설정부분! 파일관련된 DTO 같은 개념임! 
 				Constants.MAX_UPLOAD,    // 업로드 최대용량      
@@ -50,17 +50,23 @@ public class RegisterPlayAction implements Action {
 				
 		
 		
+		int bno = Integer.parseInt(multi.getParameter("bno"));
 		String title = multi.getParameter("title");  // input 값의 있는 name 값들을multi.getParameter에  담아줘서 사용.
 		String content = multi.getParameter("content");
 		String writer = multi.getParameter("writer");
-		
+		int bFileSize = Integer.parseInt(multi.getParameter("basic_file")); // 기존 첨부파일
+		String bFilename = multi.getParameter("basic_file_name");
+		String bCheck = multi.getParameter("basic_check");
 		String filename = " ";
 		int filesize = 0;
 		
 				
 		
 		// 3.파일업로드3 ) DB에 저장할 첨부파일의 이름과 사이즈를 구함.
-		
+		// 새로 등록한 첨부파일이 있다면 
+		// 새로 등록한 첨부파일의 filename과 filesize를 구한다.
+		// 새로등록한 첨부파일이 없다면 while() 을 타지않아
+		// : filename = " ", filesize = 0으로 고정
 		try {
 			Enumeration files = multi.getFileNames(); 
 			
@@ -78,26 +84,42 @@ public class RegisterPlayAction implements Action {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 		// 사용자가 첨부파일을 등록하지 않았을때 
 		// 파일이름이 null 이나 "" 으로 등
 		if (filename == null || filename.trim().equals("")) {
 			filename = "-";
+			if (bCheck.equals("no")) {  // 기존 첨부파일이 있는경우 (삭제)
+				File file = new File(Constants.UPLOAD_PATH + bFilename);
+				file.delete();
+			}else { // 현상태 유지
+					// 위에서 기존첨부파일 값을 초기화 하였기 때문에 다시입력.
+				filename = bFilename;
+				filesize = bFileSize;
+			}
+			
+		} else {
+			if (bFileSize > 0) { 
+				File file = new File(Constants.UPLOAD_PATH + bFilename);
+				file.delete();
+			}
 		}
 		
-		BoardDTO bDto = new BoardDTO(title, content, writer,filename,filesize);
+		BoardDTO bDto = new BoardDTO(bno, title, content, writer, filename, filesize);
 		System.out.println( bDto.toString());
-		BoardDAO bDao = BoardDAO.getInstance();		
-		System.out.println("게시글 등록확인" +bDto.toString());
-		bDao.registerAdd(bDto);
+		BoardDAO bDao = BoardDAO.getInstance();			
+		bDao.modify(bDto);
 		
 		
-		
+		String url = "viewtable.retro?bno="+bno;
 		
 		ActionForward  forward = new ActionForward(); 
 		forward.setpath(url);  // 경로를 찾아감. 액션포워드의 setpath 메서드를 탐. 
 		forward.setRedirect(true);  //forward 방식으로 보냄
 		
 		return forward;
+		
 	}
 
 }

@@ -317,7 +317,8 @@
 					</script>
 				</div>
 				<div class="forn-group">
-					<label for="writer">작성자</label> <input type="text" id="writer" name="writer" class="form-control" value="user01" readonly="readonly">
+					
+					<label for="writer">작성자</label> <input type="text" id="writer" name="writer" class="form-control" value="${sessionScope.loginUser.id}" readonly="readonly">
 				</div>
 				<div id="file_wrap">
 					<input type="file" name="uploadfile" id="uploadfile" style="display: none;">
@@ -335,6 +336,8 @@
 			</form>
 		</div>
 	</div>
+
+	
 	
 	<%@ include file="../include/footer.jsp"%>	
 </body>

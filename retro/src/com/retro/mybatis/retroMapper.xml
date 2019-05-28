@@ -185,7 +185,15 @@
 		 DELETE FROM tbl_board
 		 WHERE bno = #{bno}	
 	</delete>
-	
+	<update id="modifyBoard" parameterType="com.retro.dto.BoardDTO">
+		UPDATE FROM tbl_board
+		 SET title = #{title},	
+		 	content = #{content},	
+		 	filename = #{filename},	
+		 	filesize = #{filesize}
+		WHERE bno = #{bno}	
+		 		
+	</update>
 	
 
 </mapper>

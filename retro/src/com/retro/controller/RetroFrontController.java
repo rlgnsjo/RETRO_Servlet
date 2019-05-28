@@ -25,6 +25,7 @@ import com.retro.action.LoginPageAction;
 import com.retro.action.LogoutAjaxAction;
 import com.retro.action.MemberAction;
 import com.retro.action.MemberPlayAction;
+import com.retro.action.ModifyPlayAction;
 import com.retro.action.PwCheckAction;
 import com.retro.action.PwUpdateAction;
 import com.retro.action.PwUpdatePlayAction;
@@ -156,11 +157,15 @@ public class RetroFrontController extends HttpServlet {
 		} else if (command.equals("/boardUpdate.retro")) {
 			action = new BoardUpdateAction(); // 1. 객체 생성 .
 			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
+		} else if (command.equals("/modifyPlay.retro")) {
+			action = new ModifyPlayAction(); // 1. 객체 생성 .
+			forward = action.excute(request, response);  //2. viewtable 액션의 excute매서드를 실행 이작업을 해당 action부분에서 진행할것!
 		}
 		
 		
 		
-			
+		
+		
 		
 		
 		
