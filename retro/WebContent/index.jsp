@@ -22,10 +22,10 @@
 				</li>
 			</ul>
 			<div class="desc">
-				<a href="https://www.gucci.com/kr/ko/lo/runway-c-runway"><h2>BEST
-						GUCCI LOOK</h2></a>
-
-				<p id="gucci">EXO KAI is best guc</p>
+				<a href="https://www.gucci.com/kr/ko/lo/runway-c-runway">
+				<h2>BESTGUCCI LOOK</h2></a>
+						
+			<!-- 	<p id="gucci">EXO KAI is best guc</p> -->
 
 			</div>
 		</div>
@@ -33,13 +33,13 @@
 		<div class="gallery">
 			<ul>
 				<c:forEach items="${newList}" var="sin">
-						<a href="#"><img src="images/${sin.p_img}" target="_blank "></a>
+					<a href="#"><img src="images/${sin.p_img}" target="_blank "></a>
 					</c:forEach>
 			</ul>
 
 			<div class="desc">
 				<h2>BEST K-POP STAR LOOK</h2>
-				<p id="gucci">EXO KAI is best gucci dreessr</p>
+<!-- 				<p id="gucci">EXO KAI is best gucci dreessr</p> -->
 
 			</div>
 		</div>
@@ -51,10 +51,9 @@
 					</c:forEach>
 			
 			</ul>
-
 			<div class="desc">
 				<h2>BEST CHANEL LOOK</h2>
-				<p id="gucci">EXO KAI is best guc</p>
+	<!-- 			<p id="gucci">EXO KAI is best guc</p> -->
 			</div>
 	
 		</div>

@@ -40,17 +40,15 @@
 					<li><a href="${path}/loginPage.retro">로그인</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="#">${sessionScope.loginUser.name}</a>(${sessionScope.loginUser.id})</li>
+					<li style="color:white"><a href="#" style="color:#FFB6C1">${sessionScope.loginUser.name}</a>(${sessionScope.loginUser.id})</li>
 					 <%-- a href="${path}/loginOutAjax.retro"  --%>
 					<li><a href="#" class="logout_btn">로그아웃</a></li>
 					<li><a href="${path}/pwUpdate.retro">비밀번호수정</a></li>
 					<li><a href="${path}/infoUdate.retro">내정보수정</a></li>
 					<li><a href="${path}/dropMember.retro">회원 탈퇴</a></li>
 				</c:otherwise>
-			</c:choose>	
-				
+			</c:choose>					
 			</ul>
-
 		</div>	
 	</div>		
 	<div class="header_logo">		

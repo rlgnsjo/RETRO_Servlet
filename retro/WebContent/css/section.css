@@ -1,9 +1,7 @@
 .gallery {
-	margin-top: 30px;
+	margin-top: 200px;
 	text-align: center;
-	padding-top: 200px;
-	padding-left: 100px;
-	
+	padding-top: 80px;		
 	
 }
 
@@ -15,9 +13,11 @@
 		} */
 .gallery img {
 	width: 280px;
-	border: solid #FFD8D8 1px;
+	border: solid #FFD8D8 0.5px;
+	box-shadow: 0 1px 10px 0 rgba(0,0,0,0.2), 0 2px 10px 0  #FADAE5;
 	height: auto !important;
 	text-decoration: none;
+	padding: 8px;
 }
 
 .gallery .desc {
