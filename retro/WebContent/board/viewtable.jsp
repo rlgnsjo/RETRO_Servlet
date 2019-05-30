@@ -304,12 +304,12 @@
 		        	<span class="replyCnt_Color">${bDto.replycnt}</span>
 		        </c:if>
 		        <c:if test="${today == regdate}">
-		        <span class="new_time">New</span>
+		         <span class="new_time">New</span>
 		        </c:if>
 		        </td>		        
 		          <td>${bDto.writer}</td>		     
-		        <td>${bDto.viewcnt}</td>
-		        <td>${bDto.goodcnt}<i class="fas fa-heart"></i></td>
+		       	 <td>${bDto.viewcnt}</td>
+		         <td>${bDto.goodcnt}<i class="fas fa-heart"></i></td>
 		      	<td> 
 		      	 <c:choose>
 		      	 	<c:when test="${today == regdate}">  <!-- 오늘날짜랑 같은 경우만 시분초를 띄워줘라. -->
@@ -333,16 +333,12 @@
 		    </tr>
 	    </c:forEach>
 	    <tbody>
-	    <c:if test="${!empty keyword}">
-			<div id= "search_result">
-				<span class="search_span">"${keyword}"</span>로 검색한 결과는 총
-				<span class="search_span">"${totalCount}"</span>건 입니다.
-			</div>
-		
-		</c:if>
-		
-	  
-
+		    <c:if test="${!empty keyword}">
+				<div id= "search_result">
+					<span class="search_span">"${keyword}"</span>로 검색한 결과는 총
+					<span class="search_span">"${totalCount}"</span>건 입니다.
+				</div>		
+			</c:if>			 
 	    </tbody>
 	</table>
 	<!-- x테이블 종료!@ -->	
