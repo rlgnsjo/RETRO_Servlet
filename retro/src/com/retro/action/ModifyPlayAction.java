@@ -59,6 +59,7 @@ public class ModifyPlayAction implements Action {
 		String bCheck = multi.getParameter("basic_check");
 		String filename = " ";
 		int filesize = 0;
+		System.out.println(">>>>>>>>>>" +bno+title+content + writer + bFileSize + bFilename + bCheck +filename + filesize);
 		
 				
 		

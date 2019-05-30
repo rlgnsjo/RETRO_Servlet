@@ -19,12 +19,14 @@ public class BoardUpdateAction implements Action {
 		// 게시글 1건(상세조회)
 		
 		String bno = request.getParameter("bno");		
+		System.out.println(">>>>>>>>>"+ bno);
 		BoardDAO bDao = BoardDAO.getInstance();
 		HttpSession session = request.getSession();
 		
 		
 		
 		BoardDTO bDto = bDao.view(bno); // 현재 jsp 파일 안에 값들을 모두 담아있음.
+		System.out.println(bDto.toString());
 		request.setAttribute("one", bDto);
 				
 		

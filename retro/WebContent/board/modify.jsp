@@ -298,8 +298,9 @@
 		}
 	});
 	
-	$(document).on("click", ".btn-file", function(){
-		$("#uploadfile").click();
+	
+	$(document).on("click", "#file_submit", function(){
+		 $("#uploadfile").click(); 
 	});
 	
 	$(document).on("change", "#uploadfile", function(){
@@ -337,11 +338,21 @@
 		$("#close_file_btn").css("display", "none");
 	});
 	
+
+	
+	$(document).on("click", "#close_file_btn", function(){
+		$("#uploadfile").replaceWith($("#uploadfile").clone(true));
+		$("#uploadfile").val("");
+		$("#now-file-size").text("");
+		$("#file-name").text("선택된 파일 없음");
+		$("#close_file_btn").css("display", "none");
+	});
+	
 	$(document).on("click", ".close_basic_btn", function(){
 		$('.file_msg').css('display', 'block');
 		$('.basic_files').css('color', '#AAA');
-						 .css('text-decoration', 'line-through');		
-	}
+					
+	});
 	
 	$(document).on("click", "#btn-primary", function(){
 			alert("system error");
@@ -383,6 +394,7 @@
 						 sSkinURI: "<%= request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
 						 fCreator: "createSEditor2"
 						});
+		
 					</script>
 				</div>
 				<div class="forn-group">
@@ -390,10 +402,20 @@
 					
 				</div>
 				<div id="file_wrap">
-					<input type="file" name="uploadfile" id="uploadfile" style="display: none;">
-					<input type="button" class="btn btn-file" value="파일 선택"> 											
-					<span class="basic_files" id="file-name" style="height: 29px; border: none;" >선택된 파일 없음</span> 
-					<span class="file_msg">[첨부파일 삭제됨.]</span> 
+					<input type="file" name="uploadfile" id="uploadfile" style="display: none">
+					<input type="button" class="btn btn-file" value="파일 선택" id="file_submit"> 	
+					<c:if test="${one.filesize > 0}">
+					${one.filename}
+					</c:if>
+						
+				<c:choose>
+					 <c:when test="${empty filesize}">
+						<span class="basic_files" id="file-name" style="height: 29px; diplay: none;" > -->선택된 파일 없음 </span>  
+						</c:when>
+						<c:otherwise><span class="file_msg">[첨부파일 삭제됨.]</span> 
+						</c:otherwise>						
+				</c:choose>							
+					
 					<i class="fas fa-check open_file_btn"></i>
 					<i class="fas fa-time close_file_btn close_basic_btn"></i>
 					<span id="now-file-size" ></span>
@@ -405,6 +427,9 @@
 			<div>
 				<button class="btn btn-primary" id="btn-primary">게시글 수정</button>
 			</div>				
+			<input type="hidden" value="${one.bno}" name="bno"  >
+			<input type="hidden" value="${one.filesize}" name="basic_file" >
+			<input type="hidden" value="${one.filename}" name="basic_file_name" >
 			
 			</form>
 		</div>

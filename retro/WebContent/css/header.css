@@ -1,12 +1,13 @@
 	.nav_wrap {
-			position:pixed;
-			 width: 100%; 
+			text-align: center;			
+			 width: 1400px;
+			 margin: 0 auto;
 			height: 65px;
 			background: white; 
 
 		}
 		.nav_wrap > div> ul> li{
-			float: left;
+			float: left; 
 			position: relative;
 
 
@@ -107,7 +108,7 @@
 
 
 	.inner_header {
-		/max-width: 1440px; 
+		max-width: 1440px; 
 		margin: 0 auto;
 
 	}
@@ -118,8 +119,8 @@
 	}
 	.header_nav {
 		text-align: center;
-		 width: 100%; 
-		padding-left: 200px;
+		width: 1400px; 
+		margin: 0 auto;
 		background-color: white;
 		height: 65px; 
 	}
