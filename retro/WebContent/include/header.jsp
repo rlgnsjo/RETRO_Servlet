@@ -10,8 +10,48 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<header>
+	<div id="modal">
+		<div id="modal_login">
+			<header>
+			<div class="header_logo"><img alt="네이버로고" src="images/피앙세.png"></div>
+		</header>
+		<section>
+			<div class="input_tag">
+				<input type="text" class="idpw" id="login_id" name="" placeholder="아이디를 입력해주세요"></input>
+			</div>
+			<div class="input_tag">
+				<input type="password" class="idpw" id="login_pw" name="" placeholder="비밀번호를 입력해주세요"></input>
+			</div>
+			<div class="idpw_find">
+				<span class="id_find">아이디 찾기</span>
+				<span>|</span>
+				<span class="pw_find">비밀번호 찾기</span>
+			</div>
+			<div class="err_msg">등록되어 있지 않은 아이디 입니다.</div>
+			<div class="login_btn">
+				<button id="btn_login">로그인</button>
+			</div>
+			<footer>
+			<div id="footer">
+				<ul>
+					<li><a href="#">이용약관</a></li>
+					<li><strong><a href="#">개인정보처리방침</a></strong></li>
+					<li><a href="#">책임의 한계와 법적고지</a></li>
+					<li><a href="#">회원정보 고객센터</a></li>
+				</ul>
 
+				<div id="address">
+					<span>copyright</span>
+					<span>ⓒ</span>
+					<span><strong><a href="#">a finace corp.</a></strong></span>
+					<span>All Rights Reserved.</span>
+				</div>			
+			</div>
+		</section>
+		<button id="modal_close"><i class="fas fa-times"></i></button>
+		</div>
+	</div>
+	<header>
 	<div class="header_menu">
 		<div class="inner_header inner_header_menu">
 		 	<div class="header_sns">	
@@ -37,7 +77,7 @@
 			<c:choose>
 				<c:when test="${empty sessionScope.loginUser}" >
 					<li><a href="${path}/constract.retro" id="login_btn">회원가입</a></li>
-					<li><a href="${path}/loginPage.retro">로그인</a></li>
+					<li><a id="modal_open">로그인</a><%-- <a href="${path}/loginPage.retro">로그인</a> --%></li>
 				</c:when>
 				<c:otherwise>
 					<li style="color:white"><a href="#" style="color:#FFB6C1">${sessionScope.loginUser.name}</a>(${sessionScope.loginUser.id})</li>
@@ -147,9 +187,104 @@
 					$('#topBtn').click(function() {
 						$('html,body').animate({scrollTop : 0}, 60);
 					});
-				});
-
-				$(document).ready(function() {
+				});		
+				
+				$(document).ready(function(){
+					$("#btn_login").click(function(){
+						
+						var id = $.trim($('#login_id').val());
+						var pw = $.trim($('#login_pw').val());
+						
+						var regEmpty = /\s/g;
+						
+						// 1. null 체크
+						// 2. 공백 체크
+						
+						if(id == null || id.length == 0) {
+							$('.err_msg').text('필수 정보입니다.')
+										 .css('display', 'block');
+							return false;
+						} else if(id.match(regEmpty)) {
+							$('.err_msg').text('공백 없이 입력해주세요.')
+							 			 .css('display', 'block');
+							return false;
+						}
+						
+						if(pw == null || pw.length == 0) {
+							$('.err_msg').text('필수 정보입니다.')
+										 .css('display', 'block');
+							return false;
+						} else if(pw.match(regEmpty)) {
+							$('.err_msg').text('공백 없이 입력해주세요.')
+							 			 .css('display', 'block');
+							return false;
+						}
+						
+						$.ajax({
+							url: "login.retro",
+							type: "POST",
+							dataType: "json",
+							data: "id="+id+"&pw="+pw,
+							success: function(data) {
+								if(data.message == "1") {
+									location.reload();			
+								} else if(data.message == "-1") {
+									$('#login_id').select();
+									$('.err_msg').text('회원 아이디 또는 비밀번호가 일치하지 않습니다.')
+									             .css('display', 'block');
+								}
+							},
+							error:function() {
+								alert("System Error♨");
+							}
+						});
+					});
+					
+					});
+					$('#modal_open').click(function(){
+						alert("system error");
+						$('#modal').css('display', 'flex');
+						$('#login_id').focus();
+					});
+					$('#modal_close').click(function(){
+						$('.idpw').val("");
+						$('.err_msg').css('display', 'none');
+						$('#modal').css('display', 'none');
+					});
+					
+					
+					$(document).on('click', '.logout_btn', function(){
+						$.ajax({
+							url: "logoutAjax.retro",
+							type: "POST",
+							dataType: "json",						
+							success: function(data){							 
+								location.reload();
+							},
+							error:function() {
+								alert("System Error\(*.*)/");						
+							}
+							
+						});
+					});
+						
+					/* $('.logout_btn').click(function(){
+						$.ajax({
+							url: "logOutAjax.retro",
+							type: "POST",
+							dataType: "json",
+							data: "",
+							success: function(data) {
+								location.reload();
+							},
+							errer:function() {
+								alert("System Error♨");
+							}
+						});
+					}); */
+					
+					
+				/* $(document).ready(function() {
 				$('#open_btn').click(function(event) {
 					$('#modal_all').css('display', 'flex');
 					});
@@ -170,10 +305,9 @@
 							alert("System Error\(*.*)/");						
 						}
 						
-					});
+					}); */
 					
-				});
+				
 	</script>
-
 </body>
 </html>

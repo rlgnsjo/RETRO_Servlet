@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -296,61 +296,6 @@
 	
 	
 	
-	
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-	<script type="text/javascript">
-		$(document).ready(function() {			   			
-			$('#btn_login').click(function(){
-				var id = $.trim($('#inputid').val());
-				var pw = $.trim($('#inputpw').val());
-				
-				var regEmpty = /\s/g;
-				
-				if(id == null || id.length == 0) {
-					$('.err_code').text('필수 정보입니다.')
-								  .css('display', 'block');
-				return false;
-				}else if(id.match(regEmpty)) {
-					$('.err_code').text('공백없이 입력해주세요.')
-					 			  .css('display', 'block');
-				return false;
-             	}
-								
-				if(pw == null || pw.length == 0) {
-					$('.err_code').text('필수 정보입니다.')
-								  .css('display', 'block');
-				return false;
-				}else if(pw.match(regEmpty)) {
-					$('.err_code').text('공백없이 입력해주세요.')
-					 			  .css('display', 'block');
-		 		return false;
-             	}
-				
-				$.ajax({
-					url: "login.retro",
-					type: "POST",
-					dataType: "json",
-					data: "id="+id+"&pw="+pw,
-					success: function(data){
-						 
-						if(data.message == "1"){
-							location.href= "index.retro"; 
-						}else if(data.message == "-1"){
-							$('#inputid').focus();
-							$('.err_code').text('회원 아이디 또는 비밀번호가 일치하지 않습니다.')
-										  .css('display', 'block');
-						}
-					},
-					error:function() {
-						alert("System Error\(*.*)/");						
-					}
-					
-				});
-				
-								
-			});
-		});
-	</script> 
+   
 </body>
-</html>
+</html> --%>

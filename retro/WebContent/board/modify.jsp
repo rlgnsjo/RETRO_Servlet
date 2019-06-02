@@ -5,7 +5,7 @@
 <c:if test="${sessionScope.loginUser == null}">
 		<script>
 	alert("로그인 하신후 사용하세요.");
-	 location.href='${path}/loginPage.retro';
+	location.href="${path}/viewtable.retro?message=nologin";
 </script>
 </c:if>
     
@@ -151,9 +151,10 @@
 		color: red;
 	}
 	.btn {
+		display: inline block;
 		padding: 7px 15px;
 	    font-size: 14px;
-	    border-radius: 25px;
+	    border-radius: 12px;
 	    background-color: #FFB6C1;
 	    color: white;
 	    outline: none;
@@ -267,6 +268,9 @@
 	  margin: 11px;
 	  cursor:pointer;
 	 }
+	 .file_list_filesize {
+		color: #363636;
+	}
 	
 	
 </style>
@@ -287,6 +291,27 @@
 		}
 		$("#frm_bin").submit();
 	});
+	$('.close_file_btn').click(function(){
+		alert("시스템");
+		$('#file_list_filename').css("color", "#AAA")
+								.css("text-decoration", "line-through");
+		$('.file_list_filesize').css("color", "#AAA")
+								.css("text-decoration", "line-through");
+		$('.file_msg').css("display", "inline-block");
+		$('#basic_check').val("no");
+		$(this).css("display", "none");
+	});
+	
+	$('#open_file_btn').click(function(){
+		$('#file_list_filename').css("color", "#363636")
+						        .css("text-decoration", "none");
+		$('.file_list_filesize').css("color", "#363636")
+								.css("text-decoration", "none");
+		$('.file_msg').css("display", "none");
+		$('.close_file_btn').css("display", "inline-block");
+		$('#basic_check').val("yes");
+	});
+	
 	
 	$(document).on("blur", "#title", function(){
 		var title = $("#title").val();
@@ -340,15 +365,8 @@
 	
 
 	
-	$(document).on("click", "#close_file_btn", function(){
-		$("#uploadfile").replaceWith($("#uploadfile").clone(true));
-		$("#uploadfile").val("");
-		$("#now-file-size").text("");
-		$("#file-name").text("선택된 파일 없음");
-		$("#close_file_btn").css("display", "none");
-	});
 	
-	$(document).on("click", ".close_basic_btn", function(){
+	/* $(document).on("click", ".close_basic_btn", function(){
 		$('.file_msg').css('display', 'block');
 		$('.basic_files').css('color', '#AAA');
 					
@@ -356,7 +374,7 @@
 	
 	$(document).on("click", "#btn-primary", function(){
 			alert("system error");
-	});
+	}) */;
 	
 	
 	
@@ -398,23 +416,47 @@
 					</script>
 				</div>
 				<div class="forn-group">
-					<label for="writer">작성자</label><input value="${one.writer}" type="text" id="writer" name="writer" class="form-control"  readonly="readonly">
-					
+					<label for="writer">작성자</label>
+					<input value="${one.writer}" type="text" id="writer" name="writer" class="form-control"value="${sessionScope.loginUser.id}"  readonly="readonly">
+					<input type="button" class="btn btn-file" value="현재 첨부파일"> 
+					<c:choose>
+						<c:when test="${one.filesize > 0}">
+							<div id="file_list" style="display: inline-block;">
+								<span class="close_file_btn" id="file_list_filename" style="height:29px; border: none; color: #363636;">${one.filename}</span>
+								<c:choose>
+									<c:when test="${one.filesize > 1024 * 1024}">
+										<span class="file_list_filesize">(<fmt:formatNumber type="number" pattern="0.00" value="${one.filesize / 1024 / 1024}"></fmt:formatNumber> MB)</span>
+									</c:when>
+									<c:otherwise>
+										<span class="file_list_filesize">(<fmt:formatNumber type="number" pattern="0.00" value="${one.filesize / 1024}"></fmt:formatNumber> KB)</span>
+									</c:otherwise>
+								</c:choose>
+								<i class="fas fa-times close_file_btn" style="display: inline-block;"></i>
+								<span class="file_msg">[첨부파일 삭제됨]
+									<i class="fas fa-check" id="open_file_btn"></i>
+								</span>
+							</div>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>		
 				</div>
 				<div id="file_wrap">
 					<input type="file" name="uploadfile" id="uploadfile" style="display: none">
 					<input type="button" class="btn btn-file" value="파일 선택" id="file_submit"> 	
-					<c:if test="${one.filesize > 0}">
+					 <%-- <c:if test="${one.filesize > 0}">
 					${one.filename}
-					</c:if>
+					</c:if> --%>						
+			 	<c:choose>
+					 <c:when test="${one.filesize > 0}">
+					 <span class="files" id="file_list_filename" style="height:29px; border: none; color: #363636;">${one.filename}</span>
 						
-				<c:choose>
-					 <c:when test="${empty filesize}">
-						<span class="basic_files" id="file-name" style="height: 29px; diplay: none;" > -->선택된 파일 없음 </span>  
 						</c:when>
-						<c:otherwise><span class="file_msg">[첨부파일 삭제됨.]</span> 
+						<c:otherwise><span class="file_msg">[첨부파일 삭제됨]
+									<i class="fas fa-check" id="open_file_btn"></i>
+								</span>
 						</c:otherwise>						
-				</c:choose>							
+				</c:choose> 							
 					
 					<i class="fas fa-check open_file_btn"></i>
 					<i class="fas fa-time close_file_btn close_basic_btn"></i>
@@ -427,10 +469,10 @@
 			<div>
 				<button class="btn btn-primary" id="btn-primary">게시글 수정</button>
 			</div>				
-			<input type="hidden" value="${one.bno}" name="bno"  >
-			<input type="hidden" value="${one.filesize}" name="basic_file" >
-			<input type="hidden" value="${one.filename}" name="basic_file_name" >
-			
+				<input type="hidden" value="${one.bno}" name="bno"  >
+				<input type="hidden" value="${one.filesize}" name="basic_file" >
+				<input type="hidden" value="${one.filename}" name="basic_file_name" >
+				<input type="hidden" value="yes" name="basic_check" id="basic_check">			
 			</form>
 		</div>
 	</div>

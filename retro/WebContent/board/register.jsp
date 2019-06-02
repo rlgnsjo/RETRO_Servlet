@@ -3,11 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <%@  include file="../include/header.jsp"%>
 <c:if test="${sessionScope.loginUser == null}">
+	<script>
+		alert("로그인 하신 후 사용하세요.");
+		location.href="${path}/viewtable.retro?message=nologin";
+	</script>
+</c:if>
+<%-- <c:if test="${sessionScope.loginUser == null}">
 		<script>
 	alert("로그인 하신후 사용하세요.");
 	 location.href='${path}/loginPage.retro';
 </script>
-</c:if>
+</c:if> --%>
     
     
     
@@ -276,7 +282,6 @@
 		}
 	});
 	
-
 	
 	$(document).on("click", "#close_file_btn", function(){
 		$("#uploadfile").replaceWith($("#uploadfile").clone(true));

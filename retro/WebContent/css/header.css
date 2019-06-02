@@ -1,9 +1,13 @@
+	
+	
 	.nav_wrap {
 			text-align: center;			
 			 width: 1200px;
 			 margin: 0 auto;
-			height: 65px;			
+			height: 65px;	
+			padding-left:18px;		
 			background: white; 
+			z-index: 1000;
 			
 
 		}
@@ -115,6 +119,7 @@
 	.inner_header {
 		max-width: 1440px; 
 		margin: 0 auto;
+		z-index: 3;
 		
 
 	}
@@ -155,6 +160,156 @@
 		display: block;
 	}
 	
+	#modal {
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+	background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+	}
+	
+	#modal_login {
+		background-color: white;
+		width: 430px;
+		height: 540px;
+		position: relative;
+		border: 1px solid #FFE3EE;	
+		border-radius: 4px;	
+		box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2), 0 4px 8px 0  #FFE3EE;
+	}
+
+ .header_logo {
+	
+	text-align: center;
+	text-shadow:0 2px 6px 0 rgba(0,0,0,0.2), 0 4px 8px 0  #FFE3EE;
+	color: #484848;
+	} 
+
+.input_tag {
+	width: 300px;
+	margin: 20px auto;
+}
+
+.input_tag>input {
+	width: 300px;
+	height: 45px;
+	border-radius: 5px;
+	font-size: 14px;
+	padding-left: 10px;
+}
+
+.idpw_find {
+	font-size: 12px;
+	padding-left: 243px;
+}
+
+.id_find {
+	cursor: pointer;
+}
+
+.pw_find {
+	cursor: pointer;
+}
+
+.id_find:hover {
+	color: 	#FFB6C1;
+	text-decoration: underline;
+}
+
+.pw_find:hover {
+	color: 	#FFB6C1;
+	text-decoration: underline;
+}
+
+.login_btn {
+	width: 300px;
+	margin: 20px auto;
+}
+
+.login_btn>button {
+	width: 300px;
+	height: 45px;
+	border: none;
+	background-color: #FFB6C1;
+	color: white;
+	font-weight: 900;
+	letter-spacing: -1;
+	font-size: 1.2em;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.flatform_log img {
+	height: 21px;
+	position: relative;
+	top: 4px;
+}
+
+.flatform_log i {
+	height: 21px;
+	color: white;
+}
+
+.flatform_log {
+	width: 350px;
+	display: flex;
+	margin: 60px auto 0;
+	justify-content: space-between;
+}
+
+.flatform_log>div {
+	width: 174.5px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	cursor: pointer;
+	font-weight: 900;
+}
+
+.flatform_log span {
+	color: white;
+}
+
+.flatform_log>div:nth-child(1) {
+	background-color: #EA4335;
+	border: 1px solid #EA4335;
+}
+
+.flatform_log>div:nth-child(2) {
+	background-color: #3B5998;
+	border: 1px solid #3B5998;
+}
+
+.err_msg {
+	text-align: center;
+	color: tomato;
+	font-size: 13px;
+	letter-spacing: -1;
+	margin: 14px;
+	display: none;
+}
+
+#modal_close {
+	font-size: 15px;
+	position: absolute;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+	outline-style: none;
+	top: 10px;
+	right: 5px;
+	opacity: 0.8;
+}
+	
+					
 	#footer{
 		padding: 45px 0;
 

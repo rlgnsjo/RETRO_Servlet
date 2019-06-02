@@ -21,7 +21,7 @@ public class RegisterAjaxAction implements Action {
 		String message = "";
 		if(session.getAttribute("loginUser") == null) {
 			// 로그인 => 모달창 띄우고 경고메세지 출력		
-			message = "login";
+			message = "no login";
 		} else {
 			message = "login";
 		}

@@ -18,12 +18,7 @@
 			<li><a href="#">회원정보 고객센터</a></li>
 		</ul>
 
-		<div id="address">
-			<!-- <span>
-				<a href="https://www.navercorp.com/">
-					<img src="img/naver_logo.png" id="addr_logo">
-				</a>
-			</span> -->
+		<div id="address">		
 			<span>copyright</span>
 			<span>ⓒ</span>
 			<span><strong><a href="#">RETRO corp.</a></strong></span>

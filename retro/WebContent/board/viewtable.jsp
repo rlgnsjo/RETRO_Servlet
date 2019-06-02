@@ -18,16 +18,17 @@
 	/* 전체를 감사주는 부분! */
 	.content {
 		font-family: 'Nanum Gothic', sans-serif;
-		width: 1100px;
-		height: 830px;
+		width: 1180px;
+		height: 810px;
 		box-sizing: border-box;
 		border: 1px solid #FFE3EE;
 		border-radius: 24px;
 		color: #282828;
-		margin: 230px auto 40px;
+		margin: 280px auto 40px;
 		padding-top: 1000px;
 		padding: 20px;
-		box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+		box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 4px 8px 0  #FFE3EE; 
+		/* box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19); */
 	}
 	/* 질문게시판부분 */
 	#order_board {
@@ -225,12 +226,17 @@
 				
 
 		/* 페이지 이동을 숫자버튼으로 알려주는 부분.  */
+		.pagination_box {
+			width: 100%;
+			height: auto;
+		}
 		.pagination {
-		  display: block;
-		  text-align: center;
-		  margin: 0 auto;
-		  width: 600px;
-		  list-style: none;
+			width: 500px;
+			margin: 20px auto 0;
+			height: 30px;
+			text-align: center;
+		    display: block;		 		
+		    list-style: none;
 		 
 
 		}
@@ -253,12 +259,7 @@
 		}
 
 		.pagination a:hover:not(.active) {background-color: #ddd;}
-		
-		.pagination_box {
-			width: 100%;
-		    margin-top: 35px; 
-			height: 26px;
-		}
+				
 
 	</style>
 	
@@ -402,11 +403,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 	
 	<script type="text/javascript">
 	
-
 	
-	$(document).ready(function() {
-						
+	$(document).ready(function() {						
 	 var sort_type = "${sort_type}"; 
+	 
 		if(sort_type == "new"){
 			$("#order_board span a").eq(0).css("color", "#FF69B4").css("font-weigt", "bold").css("text-decoration","underline");
 		} else if(sort_type == "good"){
@@ -431,33 +431,27 @@
 	});
 	function bno_val(bno) {
 		location.href= "${path}/replyboard.retro?bno=" + bno;
-	}
-	
+	} 
 	$("#boardAdd").on("click", function(){
-		$.ajax({
-			type: "post",
-			dataType: "json",
-			url: "registerAjax.retro", 			
-			success: function(data) {           
-				if(data.message == "login") {
-					location.href= "registerView.retro"
-				} else {
-					location.href= "loginPage.jsp"
-				}
-			}  
-		});
-	})
+        $.ajax({
+               type: "post",
+               dataType: "json",
+               url: "registerAjax.retro",                     
+               success: function(data) {          
+                      if(data.message == "login") {
+                            location.href= "registerView.retro"
+                      } else {
+                            $('#modal').css('display', 'flex');
+                            $('.err_msg').text('로그인이 필요한 시스템입니다.')
+                                                 .css('display', 'block');                                 
+                      }
+               } 
+        });
+  })
+	
+	
 	
 	
 		
 	</script>
-
-
-
-
-
-
-
-
-
 </html>

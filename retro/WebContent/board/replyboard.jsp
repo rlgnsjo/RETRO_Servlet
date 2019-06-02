@@ -376,7 +376,7 @@
 			margin-left: 8px;
 			display: inline-block;
 			width: 945px;
-			height: 1170px;
+			height: auto;
 
 		}
 		#conform {
@@ -530,9 +530,9 @@
 	});
 
 
-$(document).on("click", "#returnGo", function(){
+ $(document).on("click", "#returnGo", function(){
 	location.href = "<%=referer%>";
-});
+}); 
 
 $(document).ready(function(){
 	/* 문서가 준비되면 댓글 목록을 조회하는 Ajax실행  ==  */
@@ -571,7 +571,7 @@ $(document).on("click", "#reply_btn", function(){
 	}
 });
 
-function comment_list() {        // 댓글을 페이지전환없이 사용해주기 위해 사용.
+function comment_list(){        // 댓글을 페이지전환없이 사용해주기 위해 사용.
 	$.ajax({
 		type: "post",
 		url: "commentlist.retro",
@@ -582,12 +582,10 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 	});
 }
 	
-	$(document).on("click", ".reply_del", function(){
-		
+	$(document).on("click", ".reply_del", function(){		
 		var rno = $(this).attr("data_num");
 		var bno = '${one.bno}';
-		
-		
+				
 		$.ajax({
 			type: "post",
 			url: "replyRemove.retro",
@@ -595,8 +593,7 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 			success: function(result) {             
 				comment_list();
 			}  
-		});	
-		
+		});			
 	});
  	 
 
@@ -617,10 +614,6 @@ function comment_list() {        // 댓글을 페이지전환없이 사용해주
 	});
 	
 	
-	
-
-
-
 
 </script>
 <body>
