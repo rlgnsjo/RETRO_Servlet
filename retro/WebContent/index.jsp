@@ -22,8 +22,8 @@
 				</li>
 			</ul>
 			<div class="desc">
-				<a href="https://www.gucci.com/kr/ko/lo/runway-c-runway">
-				<h2>BESTGUCCI LOOK</h2></a>
+				<a href="#">
+				<h2>BEST CHANEL LOOK</h2></a>
 						
 			<!-- 	<p id="gucci">EXO KAI is best guc</p> -->
 
@@ -38,7 +38,7 @@
 			</ul>
 
 			<div class="desc">
-				<h2>BEST K-POP STAR LOOK</h2>
+				<h2>BEST GUCCI LOOK</h2>
 <!-- 				<p id="gucci">EXO KAI is best gucci dreessr</p> -->
 
 			</div>
@@ -52,7 +52,7 @@
 			
 			</ul>
 			<div class="desc">
-				<h2>BEST CHANEL LOOK</h2>
+				<h2>BEST K-POP STAR LOOK</h2>
 	<!-- 			<p id="gucci">EXO KAI is best guc</p> -->
 			</div>
 	
